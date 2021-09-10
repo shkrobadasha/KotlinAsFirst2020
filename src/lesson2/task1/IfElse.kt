@@ -5,6 +5,7 @@ package lesson2.task1
 import lesson1.task1.discriminant
 import kotlin.math.max
 import kotlin.math.sqrt
+import kotlin.math.min
 
 // Урок 2: ветвления (здесь), логический тип (см. 2.2).
 // Максимальное количество баллов = 6
@@ -148,7 +149,7 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     val m = max(max(a, b), c)
-    val n = kotlin.math.min(kotlin.math.min(a, b), c)
+    val n = min(min(a, b), c)
     val k = a + b + c - m - n
     if (m >= n + k) return -1
     if (m * m == n * n + k * k) return 1
@@ -165,8 +166,12 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
+
+
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    if (((a > c) && (b < d)) || ((c > a) && (d < b))) return kotlin.math.min((b - a), (d - c))
-    return if ((c > b) || (a > d)) -1
-    else kotlin.math.min((b - c), (d - a))
+    return when {
+        a > c && b < d || c > a && d < b -> min(b - a, d - c)
+        c > b || a > d -> -1
+        else -> min(b - c, d - a)
+    }
 }
