@@ -68,7 +68,13 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String {
+    if ((age / 10 == 1) || (age / 10 == 11) || (age % 10 == 5) || (age % 10 == 6) || (age % 10 == 7) || (age % 10 == 8)
+        || (age % 10 == 9) || (age % 10 == 0)
+    ) return "$age лет"
+    else if (age % 10 == 1) return "$age год"
+    else return "$age года"
+}
 
 /**
  * Простая (2 балла)
@@ -81,7 +87,15 @@ fun timeForHalfWay(
     t1: Double, v1: Double,
     t2: Double, v2: Double,
     t3: Double, v3: Double
-): Double = TODO()
+): Double {
+    val s1 = t1 * v1
+    val s2 = t2 * v2
+    val s3 = t3 * v3
+    val sr = (s1 + s2 + s3) / 2
+    if (sr < s1) return sr / v1
+    else if ((sr > s1) && (sr < s2 + s1)) return t1 + (sr - s1) / v2
+    else return t1 + t2 + (sr - s1 - s2) / v3
+}
 
 /**
  * Простая (2 балла)
@@ -96,7 +110,12 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int = TODO()
+): Int {
+    var u = 0
+    if ((rookX1 == kingX) || (rookY1 == kingY)) u = u + 1
+    if ((rookX2 == kingX) || (rookY2 == kingY)) u = u + 2
+    return u
+}
 
 /**
  * Простая (2 балла)
@@ -112,7 +131,12 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = TODO()
+): Int {
+    var u = 0
+    if ((rookX == kingX) || (rookY == kingY)) u = u + 1
+    if (kotlin.math.abs((kingX - bishopX)) == kotlin.math.abs((kingY - bishopY))) u = u + 2
+    return u
+}
 
 /**
  * Простая (2 балла)
@@ -122,7 +146,16 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    val m = max(max(a, b), c)
+    val n = kotlin.math.min(kotlin.math.min(a, b), c)
+    val k = a + b + c - m - n
+    if (m >= n + k) return -1
+    if (m * m == n * n + k * k) return 1
+    if (m * m < n * n + k * k) return 0
+    else return 2
+}
+
 
 /**
  * Средняя (3 балла)
