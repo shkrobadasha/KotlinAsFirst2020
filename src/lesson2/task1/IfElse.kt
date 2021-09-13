@@ -6,6 +6,7 @@ import lesson1.task1.discriminant
 import kotlin.math.max
 import kotlin.math.sqrt
 import kotlin.math.min
+import kotlin.math.abs
 
 // Урок 2: ветвления (здесь), логический тип (см. 2.2).
 // Максимальное количество баллов = 6
@@ -70,11 +71,9 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String {
-    if ((age / 10 == 1) || (age / 10 == 11) || (age % 10 == 5) || (age % 10 == 6) || (age % 10 == 7) || (age % 10 == 8)
-        || (age % 10 == 9) || (age % 10 == 0)
-    ) return "$age лет"
-    else if (age % 10 == 1) return "$age год"
-    else return "$age года"
+    return if (age / 10 == 1 || age / 10 == 11 || age % 10 > 4 || age % 10 == 0) "$age лет"
+    else if (age % 10 == 1) "$age год"
+    else "$age года"
 }
 
 /**
@@ -94,8 +93,8 @@ fun timeForHalfWay(
     val s3 = t3 * v3
     val sr = (s1 + s2 + s3) / 2
     if (sr < s1) return sr / v1
-    else if ((sr > s1) && (sr < s2 + s1)) return t1 + (sr - s1) / v2
-    else return t1 + t2 + (sr - s1 - s2) / v3
+    if (sr > s1 && sr < s2 + s1) return t1 + (sr - s1) / v2
+    return t1 + t2 + (sr - s1 - s2) / v3
 }
 
 /**
@@ -113,8 +112,8 @@ fun whichRookThreatens(
     rookX2: Int, rookY2: Int
 ): Int {
     var u = 0
-    if ((rookX1 == kingX) || (rookY1 == kingY)) u = u + 1
-    if ((rookX2 == kingX) || (rookY2 == kingY)) u = u + 2
+    if (rookX1 == kingX || rookY1 == kingY) u = u + 1
+    if (rookX2 == kingX || rookY2 == kingY) u = u + 2
     return u
 }
 
@@ -134,8 +133,8 @@ fun rookOrBishopThreatens(
     bishopX: Int, bishopY: Int
 ): Int {
     var u = 0
-    if ((rookX == kingX) || (rookY == kingY)) u = u + 1
-    if (kotlin.math.abs((kingX - bishopX)) == kotlin.math.abs((kingY - bishopY))) u = u + 2
+    if (rookX == kingX || rookY == kingY) u = u + 1
+    if (abs(kingX - bishopX) == abs(kingY - bishopY)) u = u + 2
     return u
 }
 
@@ -168,10 +167,9 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  */
 
 
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    return when {
-        a > c && b < d || c > a && d < b -> min(b - a, d - c)
-        c > b || a > d -> -1
-        else -> min(b - c, d - a)
-    }
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
+    a > c && b < d || c > a && d < b -> min(b - a, d - c)
+    c > b || a > d -> -1
+    else -> min(b - c, d - a)
 }
+
