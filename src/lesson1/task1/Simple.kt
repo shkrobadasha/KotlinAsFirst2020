@@ -94,10 +94,10 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
 fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
-    val m = min * 0.0166667
-    val s = sec * 0.000277778
+    val m = min * 0.01666667
+    val s = sec * 0.00027778
     val finaldeg = deg + m + s
-    val anglerad = finaldeg * 0.0174533
+    val anglerad = finaldeg * PI/180
     return (anglerad)
 }
 
@@ -124,7 +124,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
 fun thirdDigit(number: Int): Int {
     val three = number % 1000
     val numeric = three / 100
-    return(numeric)
+    return (numeric)
 }
 
 /**
@@ -138,7 +138,7 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
     val minutesde = hoursDepart * 60 + minutesDepart
     val minutesarr = hoursArrive * 60 + minutesArrive
     val travelTime = minutesarr - minutesde
-    return(travelTime)
+    return (travelTime)
 }
 
 /**
