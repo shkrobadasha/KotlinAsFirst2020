@@ -94,10 +94,10 @@ fun timeForHalfWay(
     val way = v1 * t1 + v2 * t2 + v3 * t3
     val halfofway = way * 0.5
     val onepart = v1 * t1
-    val secondpart = onepart + v2 * t2
+    val secondpart = v2 * t2
     return when {
         halfofway <= onepart -> (halfofway / v1)
-        ((halfofway > onepart) and (halfofway <= secondpart)) -> ((halfofway - onepart)/v2 + t1)
+        ((halfofway > onepart) and (halfofway <= (secondpart + onepart))) -> ((halfofway - onepart)/v2 + t1)
         halfofway > secondpart -> ((halfofway - (onepart + secondpart))/v3 + t1 + t2)
         else -> 0.0
     }
@@ -180,21 +180,33 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    if ((a < c) and (b < d)) {
+    if ((a <= c) and (b <= c)) {
+        return -1
+    }
+    if ((a >= c) and (d <= a)) {
+        return -1
+    }
+
+    if ((a <= c) and (b >= c)) {
         val crossing = b - c
-        if (crossing >= 0) return crossing
+        return crossing
     }
-    if ((a > c) and (d < b)) {
+
+    if ((a >= c) and (a <= d)) {
         val cross = d - a
-        if (cross >= 0) return cross
+        return cross
     }
-    if ((a < c) and (b > d)) {
-        val crossing = d - c
-        if (crossing >= 0) return crossing
+    if ((a >= c) and (b <= d)) {
+        val crossq = b - a
+        return crossq
     }
-    if ((a > c) and (b < d)) {
-        val crossing = b - a
-        if (crossing >= 0) return crossing
+    if ((a <= c) and (b >= d)) {
+        val crossw = d - c
+        return crossw
+    }
+    if ((a <= c) and (b >= d)) {
+        val crossw = d - c
+        return crossw
     }
     return -1
 }
