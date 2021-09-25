@@ -248,8 +248,8 @@ fun squareSequenceDigit(n: Int): Int {
     var length = n
     var g = 0
     var l = 1
-    var k = 10
     var m = 1
+    var k = 10
     while (length > 0) {
         g = m * m
         while (g >= k) {
