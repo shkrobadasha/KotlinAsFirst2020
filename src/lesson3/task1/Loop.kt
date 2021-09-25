@@ -79,7 +79,7 @@ fun digitNumber(n: Int): Int {
     var result = 0
     var m = n
     while (m != 0) {
-        m = m / 10
+        m /= 10
         result += 1
     }
     return result
@@ -92,8 +92,8 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    if (n <= 2) return 1
-    else return fib(n - 1) + fib(n - 2)
+    return if (n <= 2) 1
+    else fib(n - 1) + fib(n - 2)
 }
 
 /**
@@ -139,7 +139,7 @@ fun collatzSteps(x: Int): Int {
     var result = 0
     while (p != 1) {
         result += 1
-        if (p % 2 == 0) p = p / 2
+        if (p % 2 == 0) p /= 2
         else p = 3 * p + 1
     }
     return result
@@ -152,7 +152,7 @@ fun collatzSteps(x: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    for (i in max(m, n)..m * n - 1) if (i % m == 0 && i % n == 0) return i
+    for (i in max(m, n) until m * n) if (i % m == 0 && i % n == 0) return i
     return m * n
 }
 
@@ -257,7 +257,7 @@ fun squareSequenceDigit(n: Int): Int {
             l += 1
         }
         length -= l
-        m+=1
+        m += 1
     }
     while (length != 0) {
         g /= 10
