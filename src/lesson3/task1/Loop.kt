@@ -3,6 +3,8 @@
 package lesson3.task1
 
 import kotlin.math.sqrt
+import kotlin.math.max
+import kotlin.math.min
 
 // Урок 3: циклы
 // Максимальное количество баллов = 9
@@ -72,7 +74,16 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    if (n == 0) return 1
+    var result = 0
+    var m = n
+    while (m != 0) {
+        m = m / 10
+        result += 1
+    }
+    return result
+}
 
 /**
  * Простая (2 балла)
@@ -80,21 +91,32 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    if (n <= 2) return 1
+    else return fib(n - 1) + fib(n - 2)
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    for (i in 2..n)
+        if (n % i == 0) return i
+    return n
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    for (i in n - 1 downTo 2)
+        if (n % i == 0) return i
+    return 1
+}
 
 /**
  * Простая (2 балла)
@@ -112,7 +134,16 @@ fun maxDivisor(n: Int): Int = TODO()
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    var p = x
+    var result = 0
+    while (p != 1) {
+        result += 1
+        if (p % 2 == 0) p = p / 2
+        else p = 3 * p + 1
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -120,7 +151,10 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    for (i in max(m, n)..m * n - 1) if (i % m == 0 && i % n == 0) return i
+    return m * n
+}
 
 /**
  * Средняя (3 балла)
@@ -129,7 +163,10 @@ fun lcm(m: Int, n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    for (i in 2..min(m, n)) if (m % i == 0 && n % i == 0) return false
+    return true
+}
 
 /**
  * Средняя (3 балла)
@@ -138,7 +175,22 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var p = n
+    var result = 0
+    var k = 1
+    for (i in 1..20) {
+        while (p / k > 9)
+            k *= 10
+    }
+    while (p != 0) {
+        val q = p % 10
+        p /= 10
+        result += q * k
+        k /= 10
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -192,7 +244,27 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var length = n
+    var g = 0
+    var l = 1
+    var k = 10
+    var m = 1
+    while (length > 0) {
+        g = m * m
+        while (g >= k) {
+            k *= 10
+            l += 1
+        }
+        length -= l
+        m+=1
+    }
+    while (length != 0) {
+        g /= 10
+        length += 1
+    }
+    return g % 10
+}
 
 /**
  * Сложная (5 баллов)
@@ -203,4 +275,26 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    if (n < 3) return 1
+    var length = n - 2
+    var e1 = 1
+    var e2 = 1
+    var g = 0
+    var k = 10
+    var l = 1
+    while (length > 0) {
+        g = e1 + e2
+        if (e1 <= e2) e1 = g else e2 = g
+        while (g >= k) {
+            k *= 10
+            l += 1
+        }
+        length -= l
+    }
+    while (length != 0) {
+        g /= 10
+        length += 1
+    }
+    return g % 10
+}
