@@ -75,10 +75,9 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun digitNumber(n: Int): Int {
-    if (n == 0) return 1
-    var result = 0
+    var result = 1
     var m = n
-    while (m != 0) {
+    while (m > 9) {
         m /= 10
         result += 1
     }
@@ -91,10 +90,7 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int {
-    return if (n <= 2) 1
-    else fib(n - 1) + fib(n - 2)
-}
+fun fib(n: Int): Int = TODO()
 
 /**
  * Простая (2 балла)
@@ -102,7 +98,7 @@ fun fib(n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    for (i in 2..n)
+    for (i in 2..n / 2 + 1)
         if (n % i == 0) return i
     return n
 }
@@ -113,7 +109,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    for (i in n - 1 downTo 2)
+    for (i in n - 1 downTo sqrt(n.toDouble()).toInt())
         if (n % i == 0) return i
     return 1
 }
@@ -249,9 +245,9 @@ fun squareSequenceDigit(n: Int): Int {
     var g = 0
     var l = 1
     var m = 1
-    var k = 10
+    var k: Long = 10
     while (length > 0) {
-        g = m * m
+        g = (m * m)
         while (g >= k) {
             k *= 10
             l += 1
@@ -281,7 +277,7 @@ fun fibSequenceDigit(n: Int): Int {
     var e1 = 1
     var e2 = 1
     var g = 0
-    var k = 10
+    var k: Long = 10
     var l = 1
     while (length > 0) {
         g = e1 + e2
