@@ -180,33 +180,20 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    if ((a <= c) and (b <= c)) {
+    if ((a > c) and (b < d)) {
+        val razone = b - a
+        val raztwo = d - c
+        return min(razone, raztwo)
+    }
+    if ((a < c) and (b > d)) {
+        val razonee = b - a
+        val raztwoo = d - c
+        return min(razonee, raztwoo)
+    }
+    if ((a > d) or (c > b)) {
         return -1
     }
-    if ((a >= c) and (d <= a)) {
-        return -1
-    }
-
-    if ((a <= c) and (b >= c)) {
-        val crossing = b - c
-        return crossing
-    }
-
-    if ((a >= c) and (a <= d)) {
-        val cross = d - a
-        return cross
-    }
-    if ((a >= c) and (b <= d)) {
-        val crossq = b - a
-        return crossq
-    }
-    if ((a <= c) and (b >= d)) {
-        val crossw = d - c
-        return crossw
-    }
-    if ((a <= c) and (b >= d)) {
-        val crossw = d - c
-        return crossw
-    }
-    return -1
+    val razo = b - c
+    val razt = d - a
+    return min(razo,razt)
 }
