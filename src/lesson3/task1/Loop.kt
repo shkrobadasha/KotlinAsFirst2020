@@ -110,8 +110,8 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    for (i in n - 1 downTo sqrt(n.toDouble()).toInt())
-        if (n % i == 0) return i
+    for (i in 2..sqrt(n.toDouble()).toInt())
+        if (n % i == 0) return n / i
     return 1
 }
 
@@ -149,7 +149,7 @@ fun collatzSteps(x: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    for (i in max(m, n) until m * n) if (i % m == 0 && i % n == 0) return i
+    for (i in max(m, n) until m * n step max(m, n)) if (i % m == 0 && i % n == 0) return i
     return m * n
 }
 
@@ -175,16 +175,11 @@ fun isCoPrime(m: Int, n: Int): Boolean {
 fun revert(n: Int): Int {
     var p = n
     var result = 0
-    var k = 1
-    for (i in 1..20) {
-        while (p / k > 9)
-            k *= 10
-    }
     while (p != 0) {
         val q = p % 10
         p /= 10
-        result += q * k
-        k /= 10
+        result *= 10
+        result += q
     }
     return result
 }
@@ -243,12 +238,12 @@ fun cos(x: Double, eps: Double): Double = TODO()
  */
 fun squareSequenceDigit(n: Int): Int {
     var length = n
-    var g = 0
+    var g: Long = 0
     var l = 1
     var m = 1
     var k: Long = 10
     while (length > 0) {
-        g = (m * m)
+        g = ((m * m).toLong())
         while (g >= k) {
             k *= 10
             l += 1
@@ -260,7 +255,7 @@ fun squareSequenceDigit(n: Int): Int {
         g /= 10
         length += 1
     }
-    return g % 10
+    return (g % 10).toInt()
 }
 
 /**
@@ -275,9 +270,9 @@ fun squareSequenceDigit(n: Int): Int {
 fun fibSequenceDigit(n: Int): Int {
     if (n < 3) return 1
     var length = n - 2
-    var e1 = 1
-    var e2 = 1
-    var g = 0
+    var e1: Long = 1
+    var e2: Long = 1
+    var g: Long = 0
     var k: Long = 10
     var l = 1
     while (length > 0) {
@@ -293,5 +288,5 @@ fun fibSequenceDigit(n: Int): Int {
         g /= 10
         length += 1
     }
-    return g % 10
+    return (g % 10).toInt()
 }
