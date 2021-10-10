@@ -23,10 +23,8 @@ fun isNumberHappy(number: Int): Boolean {
     val second = number / 100 - first * 10
     val fourth = number % 10
     val third = (number % 100 - fourth) / 10
-    val summafs = first + second
-    val summatf = fourth + third
     return when {
-        (summafs == summatf) -> true
+        (first + second == fourth + third) -> true
         else -> false
     }
 }
@@ -58,38 +56,11 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
 fun daysInMonth(month: Int, year: Int): Int {
-    if (month == 1) {
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
         return (31)
     }
-    if (month == 3) {
-        return (31)
-    }
-    if (month == 4) {
+    if (month == 4 || month == 6 || month == 9 || month == 11) {
         return (30)
-    }
-    if (month == 5) {
-        return (31)
-    }
-    if (month == 6) {
-        return (30)
-    }
-    if (month == 7) {
-        return (31)
-    }
-    if (month == 8) {
-        return (31)
-    }
-    if (month == 9) {
-        return (30)
-    }
-    if (month == 10) {
-        return (31)
-    }
-    if (month == 11) {
-        return (30)
-    }
-    if (month == 12) {
-        return (31)
     }
     if (month == 2) {
         if (year % 4 != 0) {

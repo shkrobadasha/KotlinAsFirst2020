@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import java.lang.Integer.min
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.sqrt
@@ -77,7 +78,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
 fun digitNumber(n: Int): Int {
     var num = n
     var counte = 0
-    if (num == 0) return 1
+    if (num <= 0) return 1
     while (num > 0) {
         if (num > 0)
             counte++
@@ -163,10 +164,13 @@ fun collatzSteps(x: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    for (k in 2..n * m) {
-        if ((k % n == 0) and (k % m == 0)) return k
+    var onenumber = m
+    var twonumber = n
+    while (onenumber != twonumber){
+        if (onenumber> twonumber) onenumber -= twonumber
+        else twonumber -= onenumber
     }
-    return n * m
+    return m * n / onenumber
 }
 
 
@@ -178,13 +182,16 @@ fun lcm(m: Int, n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var l = 0
-    for (k in 2..n * m) {
+    val l = n * m
+    var q = 0
+    val x: Double
+    sqrt(l.toDouble()).also { x = it }
+    for (k in 2..x.toInt()) {
         if ((n % k == 0) and (m % k == 0)) {
-            l = k
+            q = k
         }
     }
-    if (l > 1){
+    if (q > 1) {
         return false
     }
     return true

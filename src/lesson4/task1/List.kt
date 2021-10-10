@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import kotlin.math.max
 import kotlin.math.sqrt
 
 // Урок 4: списки
@@ -120,14 +121,33 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double = TODO()
+fun abs(v: List<Double>): Double {
+    val result = mutableListOf<Double>()
+    for (element in v) {
+        result.add(element * element)
+    }
+    val a = sqrt(result.sum())
+    return a
+}
+
 
 /**
  * Простая (2 балла)
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double = TODO()
+fun mean(list: List<Double>): Double {
+    var sum = 0.0
+    var len = 0.0
+    if (list.isEmpty()) {
+        return 0.0
+    } else {
+        sum = list.sum()
+        len = list.size.toDouble()
+
+    }
+    return sum / len
+}
 
 /**
  * Средняя (3 балла)
@@ -137,7 +157,16 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> {
+    if (list.isNotEmpty()) {
+        var average = mean(list)
+        for (i in 0 until list.size) {
+            val element = list[i]
+            list[i] -= average
+        }
+    }
+    return list
+}
 
 /**
  * Средняя (3 балла)
@@ -146,7 +175,15 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int = TODO()
+fun times(a: List<Int>, b: List<Int>): Int {
+    var result = 0
+    for (i in a.indices) {
+        val elementb = b[i]
+        val elementa = a[i]
+        result += a[i] * b[i]
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -156,7 +193,24 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-fun polynom(p: List<Int>, x: Int): Int = TODO()
+
+
+fun polynom(p: List<Int>, x: Int): Int {
+    var result = 0
+    for (i in p.indices) {
+        val elementa = p[i]
+        var step = 1
+        var j = i
+        while (j > 0) {
+            step *= x
+            j -= 1
+        }
+        step *= p[i]
+        result += step
+    }
+    return result
+}
+
 
 /**
  * Средняя (3 балла)
@@ -168,7 +222,16 @@ fun polynom(p: List<Int>, x: Int): Int = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    for (i in 0 until list.size) {
+        val element = list[i]
+        if (i > 0) {
+            var j = i - 1
+            list[i] += list[j]
+        }
+    }
+    return list
+}
 
 /**
  * Средняя (3 балла)
@@ -177,7 +240,19 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): MutableList<Int> {
+    var m = n
+    val result = mutableListOf<Int>()
+    for (i in 2..n) {
+        if (m % i == 0) {
+            while (m % i == 0) {
+                result.add(i)
+                m /= i
+            }
+        }
+    }
+    return result
+}
 
 /**
  * Сложная (4 балла)
@@ -186,7 +261,21 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String {
+    var m = n
+    val result = mutableListOf<Any>()
+    for (i in 2..n) {
+        if (m % i == 0) {
+            while (m % i == 0) {
+                result.add(i)
+                //result.add("*")
+                m /= i
+            }
+        }
+    }
+    return result.joinToString(separator = "*")
+}
+
 
 /**
  * Средняя (3 балла)
@@ -194,8 +283,18 @@ fun factorizeToString(n: Int): String = TODO()
  * Перевести заданное целое число n >= 0 в систему счисления с основанием base > 1.
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
+ *
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): MutableList<Int> {
+    var m = n
+    var result = mutableListOf<Int>()
+    while (m != 0) {
+        result.add(0, m % base)
+        m /= base
+    }
+    return result
+}
+
 
 /**
  * Сложная (4 балла)
@@ -208,7 +307,44 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    var m = n
+    var result = mutableListOf<Any>()
+    while (m != 0) {
+        var elem = m % base
+        if (elem > 9) {
+            if (elem == 10) result.add(0, "a")
+            if (elem == 11) result.add(0, "b")
+            if (elem == 12) result.add(0, "c")
+            if (elem == 13) result.add(0, "d")
+            if (elem == 14) result.add(0, "e")
+            if (elem == 15) result.add(0, "f")
+            if (elem == 16) result.add(0, "g")
+            if (elem == 17) result.add(0, "h")
+            if (elem == 18) result.add(0, "i")
+            if (elem == 19) result.add(0, "j")
+            if (elem == 20) result.add(0, "k")
+            if (elem == 21) result.add(0, "l")
+            if (elem == 22) result.add(0, "m")
+            if (elem == 23) result.add(0, "n")
+            if (elem == 24) result.add(0, "o")
+            if (elem == 25) result.add(0, "p")
+            if (elem == 26) result.add(0, "q")
+            if (elem == 27) result.add(0, "r")
+            if (elem == 28) result.add(0, "s")
+            if (elem == 29) result.add(0, "t")
+            if (elem == 30) result.add(0, "u")
+            if (elem == 31) result.add(0, "v")
+            if (elem == 32) result.add(0, "w")
+            if (elem == 33) result.add(0, "x")
+            if (elem == 34) result.add(0, "y")
+            if (elem == 35) result.add(0, "z")
+        } else result.add(0, elem)
+        m /= base
+    }
+    return result.joinToString(separator = "")
+}
+
 
 /**
  * Средняя (3 балла)

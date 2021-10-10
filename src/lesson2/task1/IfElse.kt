@@ -71,11 +71,10 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String {
     return when {
-        (age >= 11) and (age < 21) or (age >= 111) and (age < 121) -> ("$age лет")
-        (age % 10 == 1) -> ("$age год")
-        (age % 10 == 2) or (age % 10 == 3) or (age % 10 == 4) -> ("$age года")
-        else -> ("$age лет")
-
+        (age in 11..20) or (age in 111..121) -> "$age лет"
+        age % 10 == 1 -> "$age год"
+        (age % 10 == 2) or (age % 10 == 3) or (age % 10 == 4) -> "$age года"
+        else -> "$age лет"
     }
 }
 
@@ -118,9 +117,9 @@ fun whichRookThreatens(
     rookX2: Int, rookY2: Int
 ): Int {
     return when {
-        ((kingX == rookX1) || (kingY == rookY1)) && ((kingX != rookX2) && (kingY != rookY2)) -> 1
-        ((kingX == rookX2) || (kingY == rookY2)) && ((kingX != rookX1) && (kingY != rookY1))-> 2
-        ((kingX == rookX1) || (kingY == rookY1)) && ((kingX == rookX2) || (kingY == rookY2)) -> 3
+        (kingX == rookX1 || kingY == rookY1) && (kingX != rookX2 && kingY != rookY2) -> 1
+        (kingX == rookX2 || kingY == rookY2) && (kingX != rookX1 && kingY != rookY1) -> 2
+        (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
         else -> 0
     }
 
