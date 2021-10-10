@@ -146,12 +146,10 @@ fun mean(list: List<Double>): Double {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    return if (list.isEmpty()) list
-    else {
-        val sr = list.sum() / list.size
-        for (i in 0 until list.size) list[i] = list[i] - sr
-        return list
-    }
+    val sr = mean(list)
+    for (i in 0 until list.size) list[i] = list[i] - sr
+    return list
+
 }
 
 /**
@@ -162,9 +160,9 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
 fun times(a: List<Int>, b: List<Int>): Int {
-    var C = 0
-    for (i in 0..min(a.size - 1, b.size - 1)) C += a[i] * b[i]
-    return C
+    var c = 0
+    for (i in a.indices) c += a[i] * b[i]
+    return c
 }
 
 /**
@@ -177,7 +175,11 @@ fun times(a: List<Int>, b: List<Int>): Int {
  */
 fun polynom(p: List<Int>, x: Int): Int {
     var result = 0
-    for (i in p.indices) result += p[i] * x.toDouble().pow(i).toInt()
+    var j = 1
+    for (i in p.indices) {
+        result += p[i] * j
+        j *= x
+    }
     return result
 }
 
@@ -192,11 +194,8 @@ fun polynom(p: List<Int>, x: Int): Int {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
-    var sum = 0
-    for (i in 0 until list.size) {
-        list[i] += sum
-        sum = list[i]
-    }
+    for (i in 1 until list.size)
+        list[i] += list[i-1]
     return list
 }
 
@@ -273,36 +272,33 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  */
 fun roman(n: Int): String {
     val a = mutableListOf<Int>()
-    var ch1 = ""
-    var ch2 = ""
-    var ch3 = ""
-    var ch4 = ""
+    var result =""
     var k = n
     while (k != 0) {
         val q = k % 10
         k /= 10
         a.add(q)
+        a[a.size - 1] *= 10.0.pow(a.size - 1).toInt()
     }
-    for (i in 0 until a.size) a[i] = a[i] * 10.toDouble().pow(i).toInt()
     for (i in 0 until a.size) when (a[i]) {
-        1, 2, 3 -> ch1 = "I".repeat(a[i])
-        4 -> ch1 = "IV"
-        5 -> ch1 = "V"
-        6, 7, 8 -> ch1 = "V" + "I".repeat(a[i] % 5)
-        9 -> ch1 = "IX"
-        10, 20, 30 -> ch2 = "X".repeat(a[i] / 10)
-        40 -> ch2 = "XL"
-        50 -> ch2 = "L"
-        60, 70, 80 -> ch2 = "L" + "X".repeat(a[i] % 50 / 10)
-        90 -> ch2 = "XC"
-        100, 200, 300 -> ch3 = "C".repeat(a[i] / 100)
-        400 -> ch3 = "CD"
-        500 -> ch3 = "D"
-        600, 700, 800 -> ch3 = "D" + "C".repeat(a[i] % 500 / 100)
-        900 -> ch3 = "CM"
-        1000, 2000, 3000 -> ch4 = "M".repeat(a[i] / 1000)
+        1, 2, 3 -> result = "I".repeat(a[i])
+        4 -> result = "IV"
+        5 -> result = "V"
+        6, 7, 8 -> result = "V" + "I".repeat(a[i] % 5)
+        9 -> result = "IX"
+        10, 20, 30 -> result = "X".repeat(a[i] / 10) + result
+        40 -> result = "XL$result"
+        50 -> result = "L$result"
+        60, 70, 80 -> result = "L" + "X".repeat(a[i] % 50 / 10) + result
+        90 -> result = "XC$result"
+        100, 200, 300 -> result = "C".repeat(a[i] / 100) + result
+        400 -> result = "CD$result"
+        500 -> result = "D$result"
+        600, 700, 800 -> result = "D" + "C".repeat(a[i] % 500 / 100) + result
+        900 -> result = "CM$result"
+        1000, 2000, 3000 -> result = "M".repeat(a[i] / 1000) + result
     }
-    return ch4 + ch3 + ch2 + ch1
+    return result
 }
 
 /**
