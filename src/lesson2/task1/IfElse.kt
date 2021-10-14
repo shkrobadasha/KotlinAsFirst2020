@@ -96,8 +96,8 @@ fun timeForHalfWay(
     val secondpart = v2 * t2
     return when {
         halfofway <= onepart -> (halfofway / v1)
-        ((halfofway > onepart) and (halfofway <= (secondpart + onepart))) -> ((halfofway - onepart)/v2 + t1)
-        halfofway > secondpart -> ((halfofway - (onepart + secondpart))/v3 + t1 + t2)
+        ((halfofway > onepart) && (halfofway <= (secondpart + onepart))) -> ((halfofway - onepart)/v2 + t1)
+        halfofway > secondpart -> ((halfofway - (onepart + secondpart))/ v3 + t1 + t2)
         else -> 0.0
     }
 }
@@ -115,16 +115,13 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int {
-    return when {
+): Int =
+    when {
         (kingX == rookX1 || kingY == rookY1) && (kingX != rookX2 && kingY != rookY2) -> 1
         (kingX == rookX2 || kingY == rookY2) && (kingX != rookX1 && kingY != rookY1) -> 2
         (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
         else -> 0
     }
-
-}
-
 /**
  * Простая (2 балла)
  *
@@ -160,12 +157,9 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     if ((a + b > c) && (a + c > b) && (c + b > a)) {
-        val coa = (b * b + c * c - a * a) / (2 * c * b)
-        val cob = (-b * b + c * c + a * a) / (2 * c * a)
-        val coc = (b * b - c * c + a * a) / (2 * a * b)
-        if ((coa > 0) && (cob > 0) && (coc > 0)) return 0
-        if ((coa == 0.0) || (cob == 0.0) || (coc == 0.0)) return 1
-        if ((coa < 0) || (cob < 0) || (coc < 0)) return 2
+        if (((b * b + c * c - a * a) / (2 * c * b) > 0) && (((-b * b + c * c + a * a) / (2 * c * a)) > 0) && ((b * b - c * c + a * a) / (2 * a * b) > 0)) return 0
+        if (((b * b + c * c - a * a) / (2 * c * b) == 0.0) || (((-b * b + c * c + a * a) / (2 * c * a)) == 0.0) || ((b * b - c * c + a * a) / (2 * a * b) == 0.0)) return 1
+        if (((b * b + c * c - a * a) / (2 * c * b) < 0) || ((-b * b + c * c + a * a) / (2 * c * a) < 0) || ((b * b - c * c + a * a) / (2 * a * b) < 0)) return 2
     }
     return -1
 }

@@ -37,16 +37,7 @@ fun isNumberHappy(number: Int): Boolean {
  * Считать, что ферзи не могут загораживать друг друга.
  */
 
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
-    val biX = ((x1 - x2) * (x1 - x2))
-    val biY = ((y1 - y2) * (y1 - y2))
-    return when {
-        x1 == x2 -> true
-        y1 == y2 -> true
-        biX == biY -> true
-        else -> false
-    }
-}
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = ((x1 == x2) || (y1 == y2) || (((x1 - x2) * (x1 - x2)) == ((y1 - y2) * (y1 - y2))))
 
 
 /**
