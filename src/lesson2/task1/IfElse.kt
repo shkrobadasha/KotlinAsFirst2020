@@ -96,8 +96,8 @@ fun timeForHalfWay(
     val secondpart = v2 * t2
     return when {
         halfofway <= onepart -> (halfofway / v1)
-        ((halfofway > onepart) && (halfofway <= (secondpart + onepart))) -> ((halfofway - onepart)/v2 + t1)
-        halfofway > secondpart -> ((halfofway - (onepart + secondpart))/ v3 + t1 + t2)
+        ((halfofway > onepart) && (halfofway <= (secondpart + onepart))) -> ((halfofway - onepart) / v2 + t1)
+        halfofway > secondpart -> ((halfofway - (onepart + secondpart)) / v3 + t1 + t2)
         else -> 0.0
     }
 }
@@ -122,6 +122,7 @@ fun whichRookThreatens(
         (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
         else -> 0
     }
+
 /**
  * Простая (2 балла)
  *
@@ -173,20 +174,9 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    if ((a > c) && (b < d)) {
-        val razone = b - a
-        val raztwo = d - c
-        return min(razone, raztwo)
+    return if (min(b, d) >= max(a, c)) {
+        min(b, d) - max(a, c)
+    } else {
+        -1
     }
-    if ((a < c) && (b > d)) {
-        val razonee = b - a
-        val raztwoo = d - c
-        return min(razonee, raztwoo)
-    }
-    if ((a > d) || (c > b)) {
-        return -1
-    }
-    val razo = b - c
-    val razt = d - a
-    return min(razo,razt)
 }

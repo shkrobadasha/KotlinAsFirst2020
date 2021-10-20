@@ -3,7 +3,6 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
-import kotlin.math.max
 import kotlin.math.sqrt
 
 // Урок 4: списки
@@ -159,9 +158,8 @@ fun mean(list: List<Double>): Double {
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     if (list.isNotEmpty()) {
-        var average = mean(list)
+        val average = mean(list)
         for (i in 0 until list.size) {
-            val element = list[i]
             list[i] -= average
         }
     }
@@ -178,8 +176,6 @@ fun center(list: MutableList<Double>): MutableList<Double> {
 fun times(a: List<Int>, b: List<Int>): Int {
     var result = 0
     for (i in a.indices) {
-        val elementb = b[i]
-        val elementa = a[i]
         result += a[i] * b[i]
     }
     return result
@@ -198,7 +194,6 @@ fun times(a: List<Int>, b: List<Int>): Int {
 fun polynom(p: List<Int>, x: Int): Int {
     var result = 0
     for (i in p.indices) {
-        val elementa = p[i]
         var step = 1
         var j = i
         while (j > 0) {
@@ -224,7 +219,6 @@ fun polynom(p: List<Int>, x: Int): Int {
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
     for (i in 0 until list.size) {
-        val element = list[i]
         if (i > 0) {
             var j = i - 1
             list[i] += list[j]
@@ -287,7 +281,7 @@ fun factorizeToString(n: Int): String {
  */
 fun convert(n: Int, base: Int): MutableList<Int> {
     var m = n
-    var result = mutableListOf<Int>()
+    val result = mutableListOf<Int>()
     while (m != 0) {
         result.add(0, m % base)
         m /= base
@@ -309,9 +303,9 @@ fun convert(n: Int, base: Int): MutableList<Int> {
  */
 fun convertToString(n: Int, base: Int): String {
     var m = n
-    var result = mutableListOf<Any>()
+    val result = mutableListOf<Any>()
     while (m != 0) {
-        var elem = m % base
+        val elem = m % base
         if (elem > 9) {
             if (elem == 10) result.add(0, "a")
             if (elem == 11) result.add(0, "b")
@@ -353,7 +347,21 @@ fun convertToString(n: Int, base: Int): String {
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    val numbers = digits.reversed().toMutableList()
+    var result = 0
+    for (i in 0 until numbers.size) {
+        var k = i
+        var a = 1
+        while (k > 0) {
+            a *= base
+            k -= 1
+        }
+        numbers[i] *= a
+        result += numbers[i]
+    }
+    return result
+}
 
 /**
  * Сложная (4 балла)
@@ -369,6 +377,7 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  */
 fun decimalFromString(str: String, base: Int): Int = TODO()
 
+
 /**
  * Сложная (5 баллов)
  *
@@ -377,7 +386,79 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    var number = ""
+    var m = n
+    while (m >= 1000) {
+        number += 'M'
+        m -= 1000
+    }
+    while (m >= 900) {
+        number += 'C'
+        number += 'M'
+        m -= 900
+    }
+
+    while (m >= 500) {
+        number += 'D'
+        m -= 500
+    }
+
+    while (m >= 400) {
+        number += 'C'
+        number += 'D'
+        m -= 400
+    }
+    while (m >= 100) {
+        number += 'C'
+        m -= 100
+    }
+    while (m >= 90) {
+        number += 'X'
+        number += 'C'
+        m -= 90
+    }
+
+    while (m >= 50) {
+        number += 'L'
+        m -= 50
+    }
+    while (m >= 40) {
+        number += 'X'
+        number += 'L'
+        m -= 40
+    }
+
+    while (m >= 10) {
+        number += 'X'
+        m -= 10
+    }
+
+    while (m >= 9) {
+        number += 'I'
+        number += 'X'
+        m -= 9
+    }
+
+    while (m >= 5) {
+        number += 'V'
+        m -= 5
+    }
+
+    while (m >= 4) {
+        number += 'I'
+        number += 'V'
+        m -= 4
+    }
+
+    while (m >= 1) {
+        number += 'I'
+        m -= 1
+    }
+    return number
+}
+
+
 
 /**
  * Очень сложная (7 баллов)

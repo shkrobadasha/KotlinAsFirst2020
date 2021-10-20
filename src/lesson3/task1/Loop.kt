@@ -166,8 +166,8 @@ fun collatzSteps(x: Int): Int {
 fun lcm(m: Int, n: Int): Int {
     var onenumber = m
     var twonumber = n
-    while (onenumber != twonumber){
-        if (onenumber> twonumber) onenumber -= twonumber
+    while (onenumber != twonumber) {
+        if (onenumber > twonumber) onenumber -= twonumber
         else twonumber -= onenumber
     }
     return m * n / onenumber
@@ -250,8 +250,11 @@ fun isPalindrome(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO() /* {
+fun hasDifferentDigits(n: Int): Boolean = TODO()
+/* {
     var count = 0
+    (n / 10 == 0) ||
+
     var calculate = 0
     var n1 = n
     var n2 = n
@@ -310,7 +313,26 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var sumOfDigits = 0
+    var nextNumber = 0 /*число, которое будем возводить в квадрат*/
+    while (sumOfDigits < n) {
+        nextNumber++ /*увеличиваем на один число, которое будем возводить в квадрат*/
+        val nextSquare = nextNumber * nextNumber /*возводим очередное число в квадрат*/
+        sumOfDigits += digitNumber(nextSquare) /*считаем количество цифр в возведенном только что числе и добавляем к сумме всех остальных*/
+    }
+    if (sumOfDigits == n) return ((nextNumber) * (nextNumber )) % 10/*если они равны, то мы выводим nextSquare %10*/
+    else {
+        var square = (nextNumber) * (nextNumber )
+        var difference = sumOfDigits - n
+        while (difference > 0) {
+            square /= 10
+            difference -= 1
+        }
+        return square % 10
+    }
+
+}
 
 /**
  * Сложная (5 баллов)
@@ -321,4 +343,22 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var nextNumber = 0
+    var sumOfDigits = 0
+    while (sumOfDigits < n) {
+        nextNumber++
+        val fibonacciNumber = fib(nextNumber)
+        sumOfDigits += digitNumber(fibonacciNumber)
+    }
+    if (sumOfDigits == n) return (fib(nextNumber)) % 10
+    else {
+        var square = fib(nextNumber)
+        var difference = sumOfDigits - n
+        while (difference > 0) {
+            square /= 10
+            difference -= 1
+        }
+        return square % 10
+    }
+}
