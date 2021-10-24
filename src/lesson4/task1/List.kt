@@ -195,7 +195,7 @@ fun polynom(p: List<Int>, x: Int): Int {
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
     for (i in 1 until list.size)
-        list[i] += list[i-1]
+        list[i] += list[i - 1]
     return list
 }
 
@@ -272,7 +272,7 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  */
 fun roman(n: Int): String {
     val a = mutableListOf<Int>()
-    var result =""
+    var result = ""
     var k = n
     while (k != 0) {
         val q = k % 10
@@ -308,4 +308,64 @@ fun roman(n: Int): String {
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val units = listOf("", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+    val units1 = listOf(
+        "",
+        "одиннадцать",
+        "двенадцать",
+        "тринадцать",
+        "четырнадцать",
+        "пятнадцать",
+        "шестнадцать",
+        "семнадцать",
+        "восемнадцать",
+        "девятнадцать"
+    )
+    val tens = listOf(
+        "",
+        "десять",
+        "двадцать",
+        "тридцать",
+        "сорок",
+        "пятьдесят",
+        "шестьдесят",
+        "семьдесят",
+        "восемьдесят",
+        "девяносто"
+    )
+    val hundreds =
+        listOf("", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот")
+    val thousands = listOf("тысяч", "одна тысяча", "две тысячи", "три тысячи", "четыре тысячи")
+    val a = mutableListOf<Int>()
+    var result = ""
+    var k = n
+    while (k != 0) {
+        val q = k % 10
+        k /= 10
+        a.add(q)
+        a[a.size - 1] *= 10.0.pow(a.size - 1).toInt()
+    }
+    for (i in 0 until a.size) when {
+        a[i] / 10 == 0 ->
+            result += try {
+                if (a[i] != 0 && a[i + 1] == 10) units1[a[i]] else units[a[i]]
+            } catch (e: Exception) {
+                units[a[i]]
+            }
+        a[i] % 10 == 0 && a[i] / 100 == 0 && (a[i] != 10 || a[i - 1] == 0) -> result = tens[a[i] / 10] + " " + result
+        a[i] % 100 == 0 && a[i] / 1000 == 0 -> result = hundreds[a[i] / 100] + " " + result
+        a[i] % 1000 == 0 && a[i] / 10000 == 0 -> result = try {
+            if (a[i] != 0 && a[i + 1] == 10000) units1[a[i] / 1000] + " тысяч " + result
+            else if (a[i] < 5000) thousands[a[i] / 1000] + " " + result else units[a[i] / 1000] + " тысяч " + result
+        } catch (e: Exception) {
+            if (a[i] < 5000) thousands[a[i] / 1000] + " " + result else units[a[i] / 1000] + " тысяч " + result
+        }
+        a[i] % 10000 == 0 && a[i] < 100000 && (a[i] != 10000 || a[i - 1] == 0) -> result =
+            if (a[i - 1] == 0) tens[a[i] / 10000] + " тысяч " + result else tens[a[i] / 10000] + " " + result
+        a[i] % 100000 == 0 -> result = if (a[i - 1] == 0 && a[i - 2] == 0) hundreds[a[i] / 100000] + " тысяч " + result
+        else hundreds[a[i] / 100000] + " " + result
+    }
+    result = result.trim()
+    return result
+}
