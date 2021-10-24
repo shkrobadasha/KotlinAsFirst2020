@@ -3,6 +3,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
@@ -71,7 +72,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String {
     return when {
-        (age in 11..20) or (age in 111..121) -> "$age лет"
+        (age in 11..19) or (age in 111..120) -> "$age лет"
         age % 10 == 1 -> "$age год"
         (age % 10 == 2) or (age % 10 == 3) or (age % 10 == 4) -> "$age года"
         else -> "$age лет"
@@ -158,9 +159,12 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     if ((a + b > c) && (a + c > b) && (c + b > a)) {
-        if (((b * b + c * c - a * a) / (2 * c * b) > 0) && (((-b * b + c * c + a * a) / (2 * c * a)) > 0) && ((b * b - c * c + a * a) / (2 * a * b) > 0)) return 0
-        if (((b * b + c * c - a * a) / (2 * c * b) == 0.0) || (((-b * b + c * c + a * a) / (2 * c * a)) == 0.0) || ((b * b - c * c + a * a) / (2 * a * b) == 0.0)) return 1
-        if (((b * b + c * c - a * a) / (2 * c * b) < 0) || ((-b * b + c * c + a * a) / (2 * c * a) < 0) || ((b * b - c * c + a * a) / (2 * a * b) < 0)) return 2
+        val CosAlpha = (b * b + c * c - a * a) / (2 * c * b)
+        val CosBetha = (-b * b + c * c + a * a) / (2 * c * a)
+        val CosGamma = (b * b - c * c + a * a) / (2 * a * b)
+        if (minOf(CosAlpha, CosBetha, CosGamma) > 0) return 0
+        if (sqr(maxOf(a, b, c)) == sqr(a + b + c - maxOf(a, b, c) - minOf(a, b, c)) + sqr(minOf(a, b, c))) return 1
+        if (minOf(CosAlpha, CosBetha, CosGamma) < 0) return 2
     }
     return -1
 }

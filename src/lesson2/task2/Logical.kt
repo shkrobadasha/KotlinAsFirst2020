@@ -3,6 +3,8 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Пример
@@ -46,30 +48,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = ((x1 == x2) ||
  * Дан номер месяца (от 1 до 12 включительно) и год (положительный).
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
-fun daysInMonth(month: Int, year: Int): Int {
-    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
-        return (31)
-    }
-    if (month == 4 || month == 6 || month == 9 || month == 11) {
-        return (30)
-    }
-    if (month == 2) {
-        if (year % 4 != 0) {
-            return (28)
-        }
-        if (year % 100 != 0) {
-            return (29)
-        }
-        if ((year % 400 != 0) and (year % 100 == 0)) {
-            return (28)
-        }
-        if (year % 400 == 0) {
-            return (29)
-        }
-    }
-    return (-1)
-}
-
+fun daysInMonth(month: Int, year: Int): Int = TODO()
 
 /**
  * * Простая (2 балла)
@@ -80,8 +59,7 @@ fun daysInMonth(month: Int, year: Int): Int {
  */
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
-    x2: Double, y2: Double, r2: Double
-): Boolean {
+    x2: Double, y2: Double, r2: Double): Boolean {
     if (r2 < r1) {
         return false
     }
@@ -98,5 +76,5 @@ return ((sqr(x2 - x1) + sqr(y2 - y1)) <= sqr(r2 - r1))
  * Вернуть true, если кирпич пройдёт
  * */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
-    (((a <= r) and (b <= s)) or ((a <= r) and (c <= s)) or ((a <= s) and (b <= r)) or ((a <= s) and (c <= r)) or ((c <= r) and (b <= s)) or ((c <= s) and (b <= r)))
+    (minOf(a, b, c) <= min(r, s)) && ((a + b + c - maxOf(a, b, c) - minOf(a, b, c)) <= max(r, s))
 
