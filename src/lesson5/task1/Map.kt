@@ -98,8 +98,12 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  */
 fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
     val result = mutableMapOf<Int, MutableList<String>>()
-    for ((key, value) in grades) if (result[value] == null) result[value] = mutableListOf(key)
-    else result[value]!!.add(key)
+    for ((key, value) in grades) {
+        result.getOrPut(value) { mutableListOf(key) }.add(key)
+    }
+    for (e in result) {
+        e.value.removeAt(0)
+    }
     return result
 }
 
@@ -114,7 +118,9 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
-    for ((key, value) in a) if (value != b[key]) return false
+    for ((key, value) in a) {
+        if (value != b[key]) return false
+    }
     return true
 }
 
@@ -134,8 +140,12 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
  */
 fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
     val c = mutableListOf<String>()
-    for ((key, value) in a) if (value == b[key]) c.add(key)
-    for (i in c) a.remove(i)
+    for ((key, value) in a) {
+        if (value == b[key]) c.add(key)
+    }
+    for (i in c) {
+        a.remove(i)
+    }
 }
 
 /**
@@ -288,7 +298,11 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
-    for (i in 0 until list.size - 1) for (j in i + 1 until list.size) if (list[i] + list[j] == number) return i to j
+    val map = mutableMapOf<Int, Int>()
+    for (i in list.indices) {
+        if (map.containsKey(number - list[i])) return map[number - list[i]]!! to i
+        else map[list[i]] = i
+    }
     return -1 to -1
 }
 
