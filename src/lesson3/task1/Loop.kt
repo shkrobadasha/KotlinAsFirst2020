@@ -164,13 +164,13 @@ fun collatzSteps(x: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var onenumber = m
-    var twonumber = n
-    while (onenumber != twonumber) {
-        if (onenumber > twonumber) onenumber -= twonumber
-        else twonumber -= onenumber
+    var oneNumber = m
+    var twoNumber = n
+    while (oneNumber != twoNumber) {
+        if (oneNumber > twoNumber) oneNumber -= twoNumber
+        else twoNumber -= oneNumber
     }
-    return m * n / onenumber
+    return m * n / oneNumber
 }
 
 
@@ -191,7 +191,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
             q = k
         }
     }
-    if (q > 1) {
+    if (q >= 1) {
         return false
     }
     return true
@@ -208,10 +208,16 @@ fun revert(n: Int): Int {
     var nn = n
     var number = 0
     var ed = 0
+    if (n < 0) {
+        nn *= -1
+    }
     while (nn > 0) {
         ed = nn % 10
         number = number * 10 + ed
         nn /= 10
+    }
+    if (n < 0) {
+        number /= 10
     }
     return number
 }

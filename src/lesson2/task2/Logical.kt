@@ -22,11 +22,9 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  */
 fun isNumberHappy(number: Int): Boolean {
     val first = number / 1000
-    val second = number / 100 - first * 10
-    val fourth = number % 10
-    val third = (number % 100 - fourth) / 10
+    val second = number % 10
     return when {
-        (first + second == fourth + third) -> true
+        (first + number / 100 - first * 10 == second + (number % 100 - second) / 10) -> true
         else -> false
     }
 }
@@ -39,7 +37,8 @@ fun isNumberHappy(number: Int): Boolean {
  * Считать, что ферзи не могут загораживать друг друга.
  */
 
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = ((x1 == x2) || (y1 == y2) || (((x1 - x2) * (x1 - x2)) == ((y1 - y2) * (y1 - y2))))
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
+    x1 == x2 || y1 == y2 || (x1 - x2) * (x1 - x2) == (y1 - y2) * (y1 - y2)
 
 
 /**
@@ -57,9 +56,7 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
  * окружности с центром в (x2, y2) и радиусом r2.
  * Вернуть true, если утверждение верно
  */
-fun circleInside(
-    x1: Double, y1: Double, r1: Double,
-    x2: Double, y2: Double, r2: Double): Boolean {
+fun circleInside(x1: Double, y1: Double, r1: Double, x2: Double, y2: Double, r2: Double): Boolean {
     if (r2 < r1) {
         return false
     }

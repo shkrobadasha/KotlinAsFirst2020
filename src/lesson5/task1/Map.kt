@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import kotlin.math.min
+
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -97,6 +99,14 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
 fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
+/**{
+val result = mutableMapOf<Int, List<String>>()
+for ((key,value ) in grades) {
+result.getOrPut(value){ mutableListOf(key) }.add(key)
+}
+
+
+}**/
 
 /**
  * Простая (2 балла)
@@ -108,25 +118,10 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
-/**{
-val resultKeyA = mutableListOf<Any>()
-val resultValueA = mutableListOf<Any>()
-val resultKeyB = mutableListOf<Any>()
-val resultValueB = mutableListOf<Any>()
-for ((key, valu) in a) {
-resultKeyA.add(key)
-resultValueA.add(valu)
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
+    for ((key, value) in a) if (value != b[key]) return false
+    return true
 }
-for ((key, valu) in b) {
-resultKeyB.add(key)
-resultValueB.add(valu)
-}
-if (resultKeyA == resultKeyB && resultValueA == resultValueB) {
-return true
-}
-return false
-}**/
 
 /**
  * Простая (2 балла)
@@ -142,7 +137,13 @@ return false
  *   subtractOf(a = mutableMapOf("a" to "z"), mapOf("a" to "z"))
  *     -> a changes to mutableMapOf() aka becomes empty
  */
-fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Nothing = TODO()
+fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
+    for ((key, value) in a) {
+        if (value != b[key]) {
+            a.remove(key)
+        }
+    }
+}
 
 
 /**
@@ -153,6 +154,21 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Nothing =
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
+/**{
+val result = mutableListOf<String>()
+val minList = min(a.size, b.size)
+var per = 0
+for (i in 0 until minList.size) {
+result.add(a[i])
+}
+for (i in 0 until result.size) {
+for (j in 0 until b.size) {
+if (a[i] == b[j]) {
+per = b[j]
+}
+}
+result.add(per)**/
+
 
 /**
  * Средняя (3 балла)

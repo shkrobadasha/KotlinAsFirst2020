@@ -116,13 +116,16 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int =
-    when {
-        (kingX == rookX1 || kingY == rookY1) && (kingX != rookX2 && kingY != rookY2) -> 1
-        (kingX == rookX2 || kingY == rookY2) && (kingX != rookX1 && kingY != rookY1) -> 2
-        (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
-        else -> 0
+): Int {
+    var result = 0
+    if (kingX == rookX1 || kingY == rookY1) {
+        result++
     }
+    if (kingX == rookX2 || kingY == rookY2) {
+        result += 2
+    }
+    return result
+}
 
 /**
  * Простая (2 балла)
@@ -141,12 +144,14 @@ fun rookOrBishopThreatens(
 ): Int {
     val biX = (kingX - bishopX) * (kingX - bishopX)
     val biY = (kingY - bishopY) * (kingY - bishopY)
-    return when {
-        (kingX == rookX) || (kingY == rookY) && (biX != biY) -> 1
-        (kingX != rookX) && (kingY != rookY) && (biX == biY) -> 2
-        (kingX == rookX) || (kingY == rookY) && (biX == biY) -> 3
-        else -> 0
+    var result = 0
+    if (kingX == rookX || kingY == rookY) {
+        result++
     }
+    if (biX == biY) {
+        result += 2
+    }
+    return result
 }
 
 /**
@@ -159,12 +164,12 @@ fun rookOrBishopThreatens(
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     if ((a + b > c) && (a + c > b) && (c + b > a)) {
-        val CosAlpha = (b * b + c * c - a * a) / (2 * c * b)
-        val CosBetha = (-b * b + c * c + a * a) / (2 * c * a)
-        val CosGamma = (b * b - c * c + a * a) / (2 * a * b)
-        if (minOf(CosAlpha, CosBetha, CosGamma) > 0) return 0
+        val сosAlpha = (b * b + c * c - a * a) / (2 * c * b)
+        val сosBetha = (-b * b + c * c + a * a) / (2 * c * a)
+        val сosGamma = (b * b - c * c + a * a) / (2 * a * b)
+        if (minOf(сosAlpha, сosBetha, сosGamma) > 0) return 0
         if (sqr(maxOf(a, b, c)) == sqr(a + b + c - maxOf(a, b, c) - minOf(a, b, c)) + sqr(minOf(a, b, c))) return 1
-        if (minOf(CosAlpha, CosBetha, CosGamma) < 0) return 2
+        if (minOf(сosAlpha, сosBetha, сosGamma) < 0) return 2
     }
     return -1
 }
