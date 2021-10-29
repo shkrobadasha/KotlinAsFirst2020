@@ -218,7 +218,6 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
 for (element in 0 until stockPrices.size) {
 val a = stockPrices.first()
 var summa = 0
-var kolic = 0
 for (el in 0 until stockPrices.size) {
 while (stockPrices.first() == a){
 summa+= stockPrices.seconds()
