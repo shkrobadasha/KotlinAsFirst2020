@@ -153,21 +153,19 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
  * В выходном списке не должно быть повторяющихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
-/**{
-val result = mutableListOf<String>()
-val minList = min(a.size, b.size)
-var per = 0
-for (i in 0 until minList.size) {
-result.add(a[i])
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
+    val names = mutableListOf<String>()
+    for (name in a) {
+        for (nameb in b) {
+            for (nemer in names) {
+                if (name == nameb && name != nemer) {
+                    names.add(name)
+                }
+            }
+        }
+    }
+    return names
 }
-for (i in 0 until result.size) {
-for (j in 0 until b.size) {
-if (a[i] == b[j]) {
-per = b[j]
-}
-}
-result.add(per)**/
 
 
 /**
@@ -187,7 +185,23 @@ result.add(per)**/
  *     mapOf("Emergency" to "911", "Police" to "02")
  *   ) -> mapOf("Emergency" to "112, 911", "Police" to "02")
  */
-fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> = TODO()
+
+fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
+    val result = mutableMapOf<String, String>()
+    for ((name, phoneNumber) in mapA) {
+        result[name] = phoneNumber
+    }
+    result.putAll(mapB)
+    for ((name, phoneNumber) in mapA) {
+        for ((nameR, phoneNumberR) in result) {
+            if (name == nameR && phoneNumber != phoneNumberR) {
+                val q = phoneNumber + phoneNumberR
+                result.put(nameR, q)
+            }
+        }
+    }
+    return result
+}
 
 /**
  * Средняя (4 балла)
@@ -200,6 +214,20 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+/**val result = mutableMapOf<String, Double>()
+for (element in 0 until stockPrices.size) {
+val a = stockPrices.first()
+var summa = 0
+var kolic = 0
+for (el in 0 until stockPrices.size) {
+while (stockPrices.first() == a){
+summa+= stockPrices.seconds()
+
+}
+}
+}
+}**/
+
 
 /**
  * Средняя (4 балла)
