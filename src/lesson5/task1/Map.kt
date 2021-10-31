@@ -195,8 +195,8 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
     for ((name, phoneNumber) in mapA) {
         for ((nameR, phoneNumberR) in result) {
             if (name == nameR && phoneNumber != phoneNumberR) {
-                val q = phoneNumber + phoneNumberR
-                result.put(nameR, q)
+                val q = phoneNumber + "," + " " + phoneNumberR
+                result.put (nameR, q)
             }
         }
     }
