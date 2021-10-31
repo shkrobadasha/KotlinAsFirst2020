@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson5.task1.findSumOfTwo
 import java.lang.Integer.min
 import kotlin.math.abs
 import kotlin.math.max
@@ -93,12 +94,18 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int =
-    when (n) {
-        1 -> 1
-        2 -> 1
-        else -> fib(n - 1) + fib(n - 2)
+fun fib(n: Int): Int {
+    var m = n
+    var fibOne = 1
+    var fibTwo = 1
+    var fibResult = 1
+    for (i in 3..n) {
+        fibResult = fibOne + fibTwo
+        fibTwo = fibOne
+        fibOne = fibResult
     }
+    return fibResult
+}
 
 /**
  * Простая (2 балла)
