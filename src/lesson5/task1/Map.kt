@@ -200,7 +200,22 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
-/**ключ это название акции в новом массиве а значение это пара [суммаб колличество]
+
+/**{
+val result = mutableMapOf<String, Double>()//сюда будем писать итоговый результат
+val stockPricesMap = mutableMapOf<String, Double>()
+for (i in 0 until stockPrices.size ) { //оздадим массив переменный в который внесем значения из листа пары как ключ значение
+stockPricesMap.put(stockPrices[i].first, stockPrices[i].second)
+}
+for ((name,cost) in )
+if (map[key] != null) {
+for (i in 0 until stockPrices.size ) {
+val intermediateResult = mutableMapOf<String,Pair<Double,Double>>() //здесь будем копить сумму т разность
+intermediateResult.put(key, value)
+}
+//потом из массива по которому идем удаляем все значения с ключем
+}
+ключ это название акции в новом массиве а значение это пара [суммаб колличество]
  * потом идем по заданному массиву и если находим там ключ такой же как у нас ключ то  сумма увеличивается на значение а коллличество на й
  *потом в конце делим сумму на колличетсво и пехаем в массив
  * val result = mutableMapOf<String, Double>()
@@ -357,19 +372,12 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     for (i in 0 until list.size) {
-        var one = 0
-        var two = 0
-        val raznost = number - list[i]
-        if (list.contains(raznost) && i != list.indexOf(raznost)) {
-            one = i
-            two = list.indexOf(raznost)
-            return Pair(one, two)
+        if (list.contains(number - list[i]) && i != list.indexOf(number - list[i])) {
+            return Pair(i, list.indexOf(number - list[i]))
         }
     }
-    return Pair(-1,-1)
+    return Pair(-1, -1)
 }
-
-
 
 
 /**
