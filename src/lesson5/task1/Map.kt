@@ -200,32 +200,33 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
-
 /**{
 val result = mutableMapOf<String, Double>()//сюда будем писать итоговый результат
 val stockPricesMap = mutableMapOf<String, Double>()
-for (i in 0 until stockPrices.size ) { //оздадим массив переменный в который внесем значения из листа пары как ключ значение
+for (i in 0 until stockPrices.size) { //оздадим массив переменный в который внесем значения из листа пары как ключ значение
 stockPricesMap.put(stockPrices[i].first, stockPrices[i].second)
 }
-for ((name,cost) in )
-if (map[key] != null) {
-for (i in 0 until stockPrices.size ) {
-val intermediateResult = mutableMapOf<String,Pair<Double,Double>>() //здесь будем копить сумму т разность
+for ((name, cost) in stockPricesMap){
+val intermediateResult = mutableMapOf<String, Pair<Double, Double>>()
+if (stockPricesMap[name] != null) {
+intermediateResult.put(name,cost to 1.0)
+for ((names,costs) in intermediateResult){
+for (i in 0 until stockPrices.size){
+if (stockPrices[i].first == names) {
+}
+}
+}
+
+
+for (i in 0 until stockPrices.size) {
 intermediateResult.put(key, value)
 }
-//потом из массива по которому идем удаляем все значения с ключем
 }
-ключ это название акции в новом массиве а значение это пара [суммаб колличество]
- * потом идем по заданному массиву и если находим там ключ такой же как у нас ключ то  сумма увеличивается на значение а коллличество на й
- *потом в конце делим сумму на колличетсво и пехаем в массив
- * val result = mutableMapOf<String, Double>()
- *for (el in 0 until stockPrices.size){
- *for (name, pair(name))
- *if()
- *}
- **/
+}
+}
 
-
+//потом из массива по которому идем удаляем все значения с ключем
+ */
 /**
  * Средняя (4 балла)
  *
@@ -243,15 +244,17 @@ intermediateResult.put(key, value)
  */
 fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
     var names: String? = null
+    var minPrice = 0.0
     for ((name, type) in stuff) {
-        var minPrice = 0.0
-        if (type.first == kind && minPrice > type.second) {
-            minPrice = type.second
-            names = name
-        }
-        return names
+        minPrice = type.second
     }
-    return null
+    for ((name, type) in stuff) {
+        if (type.first == kind && type.second < minPrice) {
+            names = name
+            minPrice = type.second
+        }
+    }
+    return names
 }
 /**тут печатает null**/
 
@@ -298,7 +301,7 @@ counter++
 }
 }
 
-}
+
 
 }**/
 
