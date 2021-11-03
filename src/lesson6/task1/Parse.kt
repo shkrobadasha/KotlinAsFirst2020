@@ -114,7 +114,32 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    if (jumps.contains(Regex("""[^\d\s\-%]""")) ||
+        jumps.contains(Regex("""([%\-])(%|-|\d)|(%|-|\d)([%\-])"""))
+    ) {
+        return -1
+    }
+    val listOfNumbers = mutableListOf<Int>()
+    val string = Regex(""" """).split(jumps)
+    for (i in 0 until string.size) {
+        if (string[i].toString() != "%" && string[i].toString() != "-") {
+            listOfNumbers.add(string[i].toInt())
+        }
+    }
+    if (listOfNumbers.isEmpty()) {
+        return -1
+    }
+    var maxNumber = -1
+    var maxim = -1
+    for (j in 0 until listOfNumbers.size) {
+        if (listOfNumbers[j] > maxim){
+            maxim = listOfNumbers[j]
+        }
+        maxNumber = maxim
+    }
+    return (maxNumber)
+}
 
 /**
  * Сложная (6 баллов)
@@ -139,6 +164,26 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun plusMinus(expression: String): Int = TODO()
+/**{
+if ((!"$expression + ".matches(Regex("""(\d + [+-] )+""")))) {
+throw IllegalArgumentException()
+}
+
+val string = Regex(""" """).split(expression)
+for (i in 0 until string.size) {
+var summa = string[0].toInt()
+for (j in 1 until string.size) {
+if (string[i - 1] == "+") {
+summa += string[i].toInt()
+}
+if (string[i - 1] == "-") {
+summa += (-1) * string[i].toInt()
+}
+}
+return (summa)
+}
+}
+ */
 
 /**
  * Сложная (6 баллов)
@@ -147,9 +192,23 @@ fun plusMinus(expression: String): Int = TODO()
  * Определить, имеются ли в строке повторяющиеся слова, идущие друг за другом.
  * Слова, отличающиеся только регистром, считать совпадающими.
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
- * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
- */
-fun firstDuplicateIndex(str: String): Int = TODO()
+ * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в') */
+
+fun firstDuplicateIndex(str: String): Int {
+    val string = Regex(""" """).split(str)
+    if (string.size < 2) {
+        return -1
+    } else {
+        var counte = 0
+        for (i in 1 until string.size) {
+            if (string[i - 1].toLowerCase() == string[i].toLowerCase())
+                return counte
+            counte += string[i - 1].length + 1
+        }
+        return -1
+    }
+}
+
 
 /**
  * Сложная (6 баллов)

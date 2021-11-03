@@ -200,19 +200,19 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
-/**{
-val result = mutableMapOf<String, Double>()//сюда будем писать итоговый результат
-val stockPricesMap = mutableMapOf<String, Double>()
-for (i in 0 until stockPrices.size) { //оздадим массив переменный в который внесем значения из листа пары как ключ значение
-stockPricesMap.put(stockPrices[i].first, stockPrices[i].second)
-}
-for ((name, cost) in stockPricesMap){
-val intermediateResult = mutableMapOf<String, Pair<Double, Double>>()
-if (stockPricesMap[name] != null) {
-intermediateResult.put(name,cost to 1.0)
-for ((names,costs) in intermediateResult){
-for (i in 0 until stockPrices.size){
-if (stockPrices[i].first == names) {
+/**val result = mutableMapOf<String, Double>()//сюда будем писать итоговый результат
+    val stockPricesMap = mutableMapOf<String, Double>()
+    for (i in 0 until stockPrices.size) { //оздадим массив переменный в который внесем значения из листа пары как ключ значение
+    stockPricesMap.put(stockPrices[i].first, stockPrices[i].second)
+    }
+    for ((name, cost) in stockPricesMap) {
+        val intermediateResult = mutableMapOf<String, List<Double>>()
+        if (stockPricesMap[name] != null) {
+            intermediateResult.put(name, listOf(cost))
+            for ((names,costs) in intermediateResult){
+                for (i in 0 until stockPricesMap.size){
+                    if (stockPricesMap[i].first() == names) {
+                        intermediateResult.[name] = costs.add(stockPricesMap[i].first)
 }
 }
 }
@@ -226,7 +226,7 @@ intermediateResult.put(key, value)
 }
 
 //потом из массива по которому идем удаляем все значения с ключем
- */
+*/
 /**
  * Средняя (4 балла)
  *
@@ -249,7 +249,7 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
         minPrice = type.second
     }
     for ((name, type) in stuff) {
-        if (type.first == kind && type.second <= minPrice) {
+        if (type.first == kind && type.second < minPrice) {
             names = name
             minPrice = type.second
         }
