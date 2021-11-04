@@ -115,30 +115,17 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
-    if (jumps.contains(Regex("""[^\d\s\-%]""")) ||
-        jumps.contains(Regex("""([%\-])(%|-|\d)|(%|-|\d)([%\-])"""))
-    ) {
+    val parts = jumps.split(" ")
+    var result = -1
+    try {
+        for (part in parts) {
+            if (part == "-" || part == "%") continue
+            if (part.toInt() > result) result = part.toInt()
+        }
+    } catch (e: NumberFormatException) {
         return -1
     }
-    val listOfNumbers = mutableListOf<Int>()
-    val string = Regex(""" """).split(jumps)
-    for (i in 0 until string.size) {
-        if (string[i].toString() != "%" && string[i].toString() != "-") {
-            listOfNumbers.add(string[i].toInt())
-        }
-    }
-    if (listOfNumbers.isEmpty()) {
-        return -1
-    }
-    var maxNumber = -1
-    var maxim = -1
-    for (j in 0 until listOfNumbers.size) {
-        if (listOfNumbers[j] > maxim){
-            maxim = listOfNumbers[j]
-        }
-        maxNumber = maxim
-    }
-    return (maxNumber)
+    return result
 }
 
 /**
@@ -152,7 +139,22 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    val parts = jumps.split(" ")
+    var result = -1
+    val plas = "+"
+    try {
+        for (i in 1 until parts.size) {
+            if (parts[i].contains(plas)){
+                if (parts[i - 1].toInt() > result) result = parts[i - 1].toInt()
+            }
+        }
+    } catch (e: NumberFormatException) {
+        return -1
+    }
+    return result
+}
+
 
 /**
  * Сложная (6 баллов)
@@ -164,6 +166,8 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
 fun plusMinus(expression: String): Int = TODO()
+
+
 /**{
 if ((!"$expression + ".matches(Regex("""(\d + [+-] )+""")))) {
 throw IllegalArgumentException()
