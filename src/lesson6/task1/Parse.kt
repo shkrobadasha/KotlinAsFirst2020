@@ -198,20 +198,7 @@ return (summa)
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в') */
 
-fun firstDuplicateIndex(str: String): Int {
-    val string = Regex(""" """).split(str)
-    if (string.size < 2) {
-        return -1
-    } else {
-        var counte = 0
-        for (i in 1 until string.size) {
-            if (string[i - 1].toLowerCase() == string[i].toLowerCase())
-                return counte
-            counte += string[i - 1].length + 1
-        }
-        return -1
-    }
-}
+fun firstDuplicateIndex(str: String): Int = TODO()
 
 
 /**
