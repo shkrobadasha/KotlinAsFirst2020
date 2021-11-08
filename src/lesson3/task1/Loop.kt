@@ -79,7 +79,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
 fun digitNumber(n: Int): Int {
     var num = n
     var counte = 0
-    if (num <= 0) return 1
+    if (num / 10 == 0) return 1
     while (num > 0) {
         if (num > 0)
             counte++
@@ -124,14 +124,15 @@ fun minDivisor(n: Int): Int {
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
+
 fun maxDivisor(n: Int): Int {
-    var del = 1
-    for (m in 2 until n - 1) {
-        if (n % m == 0)
-            del = m
+    for (m in n - 1 downTo 1) {
+        if (n % m == 0) return m
     }
-    return del
+    return n
 }
+
+
 
 /**
  * Простая (2 балла)
@@ -334,9 +335,9 @@ fun squareSequenceDigit(n: Int): Int {
         val nextSquare = nextNumber * nextNumber /*возводим очередное число в квадрат*/
         sumOfDigits += digitNumber(nextSquare) /*считаем количество цифр в возведенном только что числе и добавляем к сумме всех остальных*/
     }
-    if (sumOfDigits == n) return ((nextNumber) * (nextNumber )) % 10/*если они равны, то мы выводим nextSquare %10*/
+    if (sumOfDigits == n) return ((nextNumber) * (nextNumber)) % 10/*если они равны, то мы выводим nextSquare %10*/
     else {
-        var square = (nextNumber) * (nextNumber )
+        var square = (nextNumber) * (nextNumber)
         var difference = sumOfDigits - n
         while (difference > 0) {
             square /= 10
