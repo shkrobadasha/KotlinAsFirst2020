@@ -190,7 +190,6 @@ fun mostExpensive(description: String): String {
 fun fromRoman(roman: String): Int {
     val a = mutableListOf<Int>()
     var result = 0
-    if (a.isEmpty()) return -1
     for (element in roman) {
         a.add(
             when (element) {
@@ -205,6 +204,7 @@ fun fromRoman(roman: String): Int {
             }
         )
     }
+    if (a.isEmpty()) return -1
     for (i in 0 until a.size - 1) {
         if (a[i] < a[i + 1]) a[i + 1] -= a[i]
         else result += a[i]
