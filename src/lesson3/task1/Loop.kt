@@ -133,7 +133,6 @@ fun maxDivisor(n: Int): Int {
 }
 
 
-
 /**
  * Простая (2 балла)
  *
@@ -153,17 +152,17 @@ fun maxDivisor(n: Int): Int {
 fun collatzSteps(x: Int): Int {
     var counte = 0
     var k = x
-    while (k != 1)
-        if (k != 1) {
-            k = if (k % 2 == 0) {
-                k / 2
-            } else {
-                k * 3 + 1
-            }
-            counte++
+    while (k != 1) {
+        if (k % 2 == 0) {
+            k /= 2
+        } else {
+            k = k * 3 + 1
         }
+        counte++
+    }
     return counte
 }
+
 
 /**
  * Средняя (3 балла)
@@ -215,17 +214,12 @@ fun isCoPrime(m: Int, n: Int): Boolean {
 fun revert(n: Int): Int {
     var nn = n
     var number = 0
-    var ed = 0
     if (n < 0) {
-        nn *= -1
+        nn = abs(nn)
     }
     while (nn > 0) {
-        ed = nn % 10
-        number = number * 10 + ed
+        number = number * 10 + nn % 10
         nn /= 10
-    }
-    if (n < 0) {
-        number /= 10
     }
     return number
 }
@@ -345,8 +339,8 @@ fun squareSequenceDigit(n: Int): Int {
         }
         return square % 10
     }
-
 }
+
 
 /**
  * Сложная (5 баллов)
