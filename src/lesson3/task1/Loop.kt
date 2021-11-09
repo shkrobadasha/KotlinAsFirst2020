@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
 import lesson5.task1.findSumOfTwo
 import java.lang.Integer.min
 import kotlin.math.abs
@@ -78,14 +79,13 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  */
 fun digitNumber(n: Int): Int {
     var num = n
-    var counte = 0
+    var count = 0
     if (num / 10 == 0) return 1
     while (num > 0) {
-        if (num > 0)
-            counte++
+        count++
         num /= 10
     }
-    return counte
+    return count
 }
 
 /**
@@ -150,7 +150,7 @@ fun maxDivisor(n: Int): Int {
  * этого для какого-либо начального X > 0.
  */
 fun collatzSteps(x: Int): Int {
-    var counte = 0
+    var count = 0
     var k = x
     while (k != 1) {
         if (k % 2 == 0) {
@@ -158,9 +158,9 @@ fun collatzSteps(x: Int): Int {
         } else {
             k = k * 3 + 1
         }
-        counte++
+        count++
     }
-    return counte
+    return count
 }
 
 
@@ -189,19 +189,15 @@ fun lcm(m: Int, n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    val l = n * m
+    //*val l = (n * m) / 2
     var q = 0
-    val x: Double
-    sqrt(l.toDouble()).also { x = it }
+    val x = sqrt(((n * m) / 2).toDouble())
     for (k in 2..x.toInt()) {
         if ((n % k == 0) and (m % k == 0)) {
             q = k
         }
     }
-    if (q >= 1) {
-        return false
-    }
-    return true
+    return q < 1
 }
 
 /**
@@ -214,15 +210,13 @@ fun isCoPrime(m: Int, n: Int): Boolean {
 fun revert(n: Int): Int {
     var nn = n
     var number = 0
-    if (n < 0) {
-        nn = abs(nn)
-    }
     while (nn > 0) {
         number = number * 10 + nn % 10
         nn /= 10
     }
     return number
 }
+
 
 /**
  * Средняя (3 балла)
@@ -235,15 +229,7 @@ fun revert(n: Int): Int {
  */
 fun isPalindrome(n: Int): Boolean {
     val poly = n
-    var nn = n
-    var number = 0
-    var ed = 0
-
-    while (nn > 0) {
-        ed = nn % 10
-        number = number * 10 + ed
-        nn /= 10
-    }
+    val number = revert(n)
     if (poly == number) {
         return true
     }
@@ -329,16 +315,15 @@ fun squareSequenceDigit(n: Int): Int {
         val nextSquare = nextNumber * nextNumber /*возводим очередное число в квадрат*/
         sumOfDigits += digitNumber(nextSquare) /*считаем количество цифр в возведенном только что числе и добавляем к сумме всех остальных*/
     }
-    if (sumOfDigits == n) return ((nextNumber) * (nextNumber)) % 10/*если они равны, то мы выводим nextSquare %10*/
-    else {
-        var square = (nextNumber) * (nextNumber)
-        var difference = sumOfDigits - n
-        while (difference > 0) {
-            square /= 10
-            difference -= 1
-        }
-        return square % 10
+    /*if (sumOfDigits == n) return ((nextNumber) * (nextNumber)) % 10если они равны, то мы выводим nextSquare %10*/
+    /*else {*/
+    var square = sqr(nextNumber)
+    var difference = sumOfDigits - n
+    while (difference > 0) {
+        square = square.div(10)
+        difference -= 1
     }
+    return square % 10
 }
 
 
@@ -359,14 +344,13 @@ fun fibSequenceDigit(n: Int): Int {
         val fibonacciNumber = fib(nextNumber)
         sumOfDigits += digitNumber(fibonacciNumber)
     }
-    if (sumOfDigits == n) return (fib(nextNumber)) % 10
-    else {
-        var square = fib(nextNumber)
-        var difference = sumOfDigits - n
-        while (difference > 0) {
-            square /= 10
-            difference -= 1
-        }
-        return square % 10
+
+    var square = fib(nextNumber)
+    var difference = sumOfDigits - n
+    while (difference > 0) {
+        square /= 10
+        difference -= 1
     }
+    return square % 10
 }
+
