@@ -213,6 +213,7 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  */
 fun mostExpensive(description: String): String = TODO()
 
+
 /**
  * Сложная (6 баллов)
  *

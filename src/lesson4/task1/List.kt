@@ -384,8 +384,17 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
 
+fun decimalFromString(str: String, base: Int): Int = TODO()
+/*{
+    for (i in 0 until str.length){
+        var
+        if (str.get(i).equals("a")){
+
+        }
+    }
+}
+*/
 
 /**
  * Сложная (5 баллов)
