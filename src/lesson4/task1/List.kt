@@ -294,7 +294,6 @@ fun convert(n: Int, base: Int): MutableList<Int> {
 }
 
 
-
 /**
  * Сложная (4 балла)
  *
@@ -307,45 +306,15 @@ fun convert(n: Int, base: Int): MutableList<Int> {
  * (например, n.toString(base) и подобные), запрещается.
  */
 fun convertToString(n: Int, base: Int): String {
-    var m = n
-    val result = mutableListOf<Any>()
-    while (m != 0) {
-        val elem = m % base
-        if (elem > 9) {
-            if (elem == 10) result.add(0, "a")
-            if (elem == 11) result.add(0, "b")
-            if (elem == 12) result.add(0, "c")
-            if (elem == 13) result.add(0, "d")
-            if (elem == 14) result.add(0, "e")
-            if (elem == 15) result.add(0, "f")
-            if (elem == 16) result.add(0, "g")
-            if (elem == 17) result.add(0, "h")
-            if (elem == 18) result.add(0, "i")
-            if (elem == 19) result.add(0, "j")
-            if (elem == 20) result.add(0, "k")
-            if (elem == 21) result.add(0, "l")
-            if (elem == 22) result.add(0, "m")
-            if (elem == 23) result.add(0, "n")
-            if (elem == 24) result.add(0, "o")
-            if (elem == 25) result.add(0, "p")
-            if (elem == 26) result.add(0, "q")
-            if (elem == 27) result.add(0, "r")
-            if (elem == 28) result.add(0, "s")
-            if (elem == 29) result.add(0, "t")
-            if (elem == 30) result.add(0, "u")
-            if (elem == 31) result.add(0, "v")
-            if (elem == 32) result.add(0, "w")
-            if (elem == 33) result.add(0, "x")
-            if (elem == 34) result.add(0, "y")
-            if (elem == 35) result.add(0, "z")
-        } else result.add(0, elem)
-        m /= base
+    val list = convert(n, base)
+    val alphabet = "abcdefghijklmnopqrstuvwxyz"
+    var result = ""
+    for (i in 0 until list.size) {
+        if (list[i] > 9) {
+            result += alphabet[list[i] - 10]
+        } else result += list[i]
     }
-    val res = result.joinToString(separator = "")
-    if (res == "") {
-        return "0"
-    }
-    return res
+    return result
 }
 
 
@@ -385,16 +354,16 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * (например, str.toInt(base)), запрещается.
  */
 
-fun decimalFromString(str: String, base: Int): Int = TODO()
-/*{
-    for (i in 0 until str.length){
-        var
-        if (str.get(i).equals("a")){
-
-        }
+fun decimalFromString(str: String, base: Int): Int {
+    val result = mutableListOf<Int>()
+    str.reversed()
+    for (i in 0 until str.length) {
+        if (str[i] > '9') {
+            result.add((((str[i] - 'a' + 10)).toChar()).digitToInt())
+        } else result.add(str[i].digitToInt())
     }
+    return decimal(result, base)
 }
-*/
 
 /**
  * Сложная (5 баллов)
@@ -475,7 +444,6 @@ fun roman(n: Int): String {
     }
     return number
 }
-
 
 
 /**

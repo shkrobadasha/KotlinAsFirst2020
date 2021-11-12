@@ -98,9 +98,25 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  * Исключения (жюри, брошюра, парашют) в рамках данного задания обрабатывать не нужно
  *
  */
-fun sibilants(inputName: String, outputName: String) {
-    TODO()
+fun sibilants(inputName: String, outputName: String) = TODO()
+/*{
+    val writer = File(outputName).bufferedWriter()
+    val consonantLetter = setOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
+    val vowelLetter = mapOf('ы' to "и", 'я' to "а", 'ю' to "у", 'Ы' to "И", 'Я' to "А", 'Ю' to "У")
+    for (line in File(inputName).readLines()) {
+        val theFirstNumber = line[0].toString()
+        writer.write(line[0])
+
+
+        }
+        writer.write(s)
+        writer.newLine() }
+
+
 }
+writer.close()
+}*/
+
 
 /**
  * Средняя (15 баллов)

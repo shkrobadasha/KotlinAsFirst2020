@@ -97,14 +97,6 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
 fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
-/**{
-val result = mutableMapOf<Int, List<String>>()
-for ((key,value ) in grades) {
-result.getOrPut(value){ mutableListOf(key) }.add(key)
-}
-
-
-}**/
 
 /**
  * Простая (2 балла)
@@ -219,8 +211,10 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
-    var names: String? = null
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+
+
+   /** var names: String? = null
     var minPrice = 0.0
     for ((name, type) in stuff) {
         minPrice = type.second
@@ -233,7 +227,7 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
     }
     return names
 }
-/**тут печатает null**/
+тут печатает null**/
 
 
 /**
