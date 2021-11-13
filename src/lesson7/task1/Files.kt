@@ -98,7 +98,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  * Исключения (жюри, брошюра, парашют) в рамках данного задания обрабатывать не нужно
  *
  */
-fun sibilants(inputName: String, outputName: String) = TODO()
+fun sibilants(inputName: String, outputName: String): Nothing = TODO()
 /*{
     val writer = File(outputName).bufferedWriter()
     val consonantLetter = setOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
