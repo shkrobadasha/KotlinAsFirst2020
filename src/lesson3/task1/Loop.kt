@@ -227,10 +227,7 @@ fun revert(n: Int): Int {
 fun isPalindrome(n: Int): Boolean {
     val poly = n
     val number = revert(n)
-    if (poly == number) {
-        return true
-    }
-    return false
+    return poly == number
 }
 
 /**
@@ -242,36 +239,6 @@ fun isPalindrome(n: Int): Boolean {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean = TODO()
-/* {
-    var count = 0
-    (n / 10 == 0) ||
-
-    var calculate = 0
-    var n1 = n
-    var n2 = n
-    var q = 0
-    var w = 0
-    if (n1 % 10 == n) {
-        return true
-    } else {
-        while (n1 > 0) {
-            q = n1 % 10
-            w = n1 % 100 - q
-            if (q == w) {
-                count++
-            }
-            n1 /= 10
-        }
-        while (n2 > 0) {
-            calculate++
-            n2 /= 10
-        }
-        if (count == calculate) {
-            return true
-        }
-        return false
-    }
-} */
 
 /**
  * Средняя (4 балла)
@@ -312,8 +279,6 @@ fun squareSequenceDigit(n: Int): Int {
         val nextSquare = nextNumber * nextNumber /*возводим очередное число в квадрат*/
         sumOfDigits += digitNumber(nextSquare) /*считаем количество цифр в возведенном только что числе и добавляем к сумме всех остальных*/
     }
-    /*if (sumOfDigits == n) return ((nextNumber) * (nextNumber)) % 10если они равны, то мы выводим nextSquare %10*/
-    /*else {*/
     var square = sqr(nextNumber)
     var difference = sumOfDigits - n
     while (difference > 0) {

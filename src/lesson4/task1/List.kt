@@ -354,16 +354,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * (например, str.toInt(base)), запрещается.
  */
 
-fun decimalFromString(str: String, base: Int): Int {
-    val result = mutableListOf<Int>()
-    str.reversed()
-    for (i in 0 until str.length) {
-        if (str[i] > '9') {
-            result.add((((str[i] - 'a' + 10)).toChar()).digitToInt())
-        } else result.add(str[i].digitToInt())
-    }
-    return decimal(result, base)
-}
+fun decimalFromString(str: String, base: Int): Int = TODO()
 
 /**
  * Сложная (5 баллов)

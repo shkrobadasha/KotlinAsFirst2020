@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import kotlin.math.max
+
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -194,8 +196,6 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
 
 
-
-
 /**
  * Средняя (4 балла)
  *
@@ -222,22 +222,6 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
     }
     return marka
 }
-
-
-   /** var names: String? = null
-    var minPrice = 0.0
-    for ((name, type) in stuff) {
-        minPrice = type.second
-    }
-    for ((name, type) in stuff) {
-        if (type.first == kind && type.second < minPrice) {
-            names = name
-            minPrice = type.second
-        }
-    }
-    return names
-}
-тут печатает null**/
 
 
 /**
@@ -267,6 +251,7 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean {
     }
     return true
 }
+
 /**
  * Средняя (4 балла)
  *
@@ -282,7 +267,7 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean {
 fun extractRepeats(list: List<String>): Map<String, Int> {
     val res = mutableListOf<String>()
     val result = mutableMapOf<String, Int>()
-    for (q in 0 until list.size){
+    for (q in 0 until list.size) {
         res.add(list[0])
     }
 
@@ -291,19 +276,20 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
             res.add(el)
         }
     }
-    for (i in 0 until res.size){
+    for (i in 0 until res.size) {
         var count = 0
-        for (j in 0 until list.size){
-            if (res[i] == list[j]){
+        for (j in 0 until list.size) {
+            if (res[i] == list[j]) {
                 count++
             }
         }
-        if(count > 1) {
+        if (count > 1) {
             result.put(res[i], count)
         }
     }
     return result
 }
+
 /**
  * Средняя (3 балла)
  *
@@ -403,3 +389,39 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  *   ) -> emptySet()
  */
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+/** в процессе  выполнения {
+val weight = mutableListOf<Int>()
+val value = mutableListOf<Int>()
+val names = mutableListOf<String>()
+var number = 0
+/*val number = treasures.size*/
+val result = mutableSetOf<String>()
+for ((name, pair) in treasures) {
+weight.add(pair.first)
+value.add(pair.second)
+names.add(name)
+number++
+}
+
+val m = Array(number + 1) { Array(capacity + 1) { 0 } }
+
+for (i in 1..number) {
+for (j in 0..capacity){
+if (weight[i] > j) {
+m[i][j] = m[i - 1][j]
+} else {
+m[i][j] = max(m[i - 1][j], m[i - 1][j - weight[i - 1]] + value[i - 1])
+}
+}
+}
+var s = capacity
+while (number > 0) {
+if (m[number][s] != m[number - 1][s]) {
+result.add(names[number - 1])
+s -= weight[number - 1]
+}
+number --
+}
+return result
+}
+ **/
