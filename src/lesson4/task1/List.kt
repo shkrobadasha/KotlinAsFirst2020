@@ -136,16 +136,13 @@ fun abs(v: List<Double>): Double {
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
-    var sum = 0.0
     var len = 0.0
+
     if (list.isEmpty()) {
         return 0.0
     } else {
-        sum = list.sum()
-        len = list.size.toDouble()
-
+        return list.sum() / list.size.toDouble()
     }
-    return sum / len
 }
 
 /**
@@ -236,17 +233,19 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> {
  */
 fun factorize(n: Int): MutableList<Int> {
     var m = n
+    var i = 2
     val result = mutableListOf<Int>()
-    for (i in 2..n) {
+    while (m > 1) {
         if (m % i == 0) {
-            while (m % i == 0) {
-                result.add(i)
-                m /= i
-            }
+            result.add(i)
+            m /= i
+        } else {
+            i++
         }
     }
     return result
 }
+
 
 /**
  * Сложная (4 балла)
@@ -256,17 +255,7 @@ fun factorize(n: Int): MutableList<Int> {
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
 fun factorizeToString(n: Int): String {
-    var m = n
-    val result = mutableListOf<Any>()
-    for (i in 2..n) {
-        if (m % i == 0) {
-            while (m % i == 0) {
-                result.add(i)
-                //result.add("*")
-                m /= i
-            }
-        }
-    }
+    val result = factorize(n)
     return result.joinToString(separator = "*")
 }
 
@@ -281,14 +270,13 @@ fun factorizeToString(n: Int): String {
  */
 fun convert(n: Int, base: Int): MutableList<Int> {
     var m = n
-    val reserv = mutableListOf<Int>()
     val result = mutableListOf<Int>()
+    if (m == 0){
+        result.add(0)
+    }
     while (m != 0) {
         result.add(0, m % base)
         m /= base
-    }
-    if (result == reserv) {
-        result.add(0)
     }
     return result
 }
@@ -308,11 +296,12 @@ fun convert(n: Int, base: Int): MutableList<Int> {
 fun convertToString(n: Int, base: Int): String {
     val list = convert(n, base)
     val alphabet = "abcdefghijklmnopqrstuvwxyz"
-    var result = ""
-    for (i in 0 until list.size) {
-        if (list[i] > 9) {
-            result += alphabet[list[i] - 10]
-        } else result += list[i]
+    val result = buildString {
+        for (i in 0 until list.size) {
+            if (list[i] > 9) {
+                append(alphabet[list[i] - 10])
+            } else append(list[i])
+        }
     }
     return result
 }
@@ -365,6 +354,20 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
 fun roman(n: Int): String {
+    val result = StringBuilder()
+    var m = n
+    val mapOfNumbers = mapOf("M" to 1000, "CM" to 900, "D" to 500, "CD" to 400, "C" to 100,
+        "XC" to 90, "L" to 50, "XL" to 40, "X" to 10, "IX" to 9, "V" to 5, "IV" to 4, "I" to 1)
+    for ((key, value) in mapOfNumbers){
+        while (m - value >= 0) {
+            m -= value
+            result.append(key)
+        }
+    }
+    return result.toString()
+}
+/**
+
     var number = ""
     var m = n
     while (m >= 1000) {
@@ -435,6 +438,9 @@ fun roman(n: Int): String {
     }
     return number
 }
+*/
+
+
 
 
 /**
