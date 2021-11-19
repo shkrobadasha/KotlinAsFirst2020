@@ -305,6 +305,7 @@ class Tests {
     @Test
     @Tag("6")
     fun findSumOfTwo() {
+
         assertEquals(
             Pair(-1, -1),
             findSumOfTwo(emptyList(), 1)

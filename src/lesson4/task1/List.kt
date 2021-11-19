@@ -268,17 +268,17 @@ fun factorizeToString(n: Int): String {
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  *
  */
-fun convert(n: Int, base: Int): MutableList<Int> {
+fun convert(n: Int, base: Int): List<Int> {
     var m = n
     val result = mutableListOf<Int>()
     if (m == 0){
         result.add(0)
     }
     while (m != 0) {
-        result.add(0, m % base)
+        result.add(m % base)
         m /= base
     }
-    return result
+    return result.reversed()
 }
 
 
@@ -366,82 +366,6 @@ fun roman(n: Int): String {
     }
     return result.toString()
 }
-/**
-
-    var number = ""
-    var m = n
-    while (m >= 1000) {
-        number += 'M'
-        m -= 1000
-    }
-    while (m >= 900) {
-        number += 'C'
-        number += 'M'
-        m -= 900
-    }
-
-    while (m >= 500) {
-        number += 'D'
-        m -= 500
-    }
-
-    while (m >= 400) {
-        number += 'C'
-        number += 'D'
-        m -= 400
-    }
-    while (m >= 100) {
-        number += 'C'
-        m -= 100
-    }
-    while (m >= 90) {
-        number += 'X'
-        number += 'C'
-        m -= 90
-    }
-
-    while (m >= 50) {
-        number += 'L'
-        m -= 50
-    }
-    while (m >= 40) {
-        number += 'X'
-        number += 'L'
-        m -= 40
-    }
-
-    while (m >= 10) {
-        number += 'X'
-        m -= 10
-    }
-
-    while (m >= 9) {
-        number += 'I'
-        number += 'X'
-        m -= 9
-    }
-
-    while (m >= 5) {
-        number += 'V'
-        m -= 5
-    }
-
-    while (m >= 4) {
-        number += 'I'
-        number += 'V'
-        m -= 4
-    }
-
-    while (m >= 1) {
-        number += 'I'
-        m -= 1
-    }
-    return number
-}
-*/
-
-
-
 
 /**
  * Очень сложная (7 баллов)
