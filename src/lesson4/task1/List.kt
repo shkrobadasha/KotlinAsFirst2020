@@ -136,7 +136,6 @@ fun abs(v: List<Double>): Double {
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
-    var len = 0.0
 
     if (list.isEmpty()) {
         return 0.0
@@ -235,7 +234,7 @@ fun factorize(n: Int): MutableList<Int> {
     var m = n
     var i = 2
     val result = mutableListOf<Int>()
-    while (m > 1) {
+    while (m > 1 && m != i - 1) {
         if (m % i == 0) {
             result.add(i)
             m /= i
@@ -297,10 +296,10 @@ fun convertToString(n: Int, base: Int): String {
     val list = convert(n, base)
     val alphabet = "abcdefghijklmnopqrstuvwxyz"
     val result = buildString {
-        for (i in 0 until list.size) {
-            if (list[i] > 9) {
-                append(alphabet[list[i] - 10])
-            } else append(list[i])
+        for (elem in list) {
+            if (elem > 9) {
+                append(alphabet[elem - 10])
+            } else append(elem)
         }
     }
     return result

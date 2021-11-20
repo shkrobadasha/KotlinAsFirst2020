@@ -142,6 +142,7 @@ fun bestLongJump(jumps: String): Int {
  * вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
+
     val parts = jumps.split(" ")
     var result = -1
     val plas = "+"
@@ -172,7 +173,10 @@ fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     for (w in 0 until parts.size) {
         val numb = parts[w]
-        if ((numb.matches(Regex("""(\d)+""")) && w % 2 == 0 && numb.toInt() >= 0) || (w % 2 != 0 && (numb == "+" || numb == "-"))) continue
+        if ((numb.matches(Regex("""(\d)+""")) && w % 2 == 0 && numb.toInt() >= 0)
+            || (w % 2 != 0 && (numb == "+"
+                    || numb == "-")))
+            continue
         else throw IllegalArgumentException(expression)
     }
     var summa = parts[0].toInt()

@@ -83,6 +83,30 @@ fun deleteMarked(inputName: String, outputName: String) {
  *
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
+    /**val result = mutableMapOf<String, Int>()
+    val text = File(inputName).readText().toLowerCase() //*все предложения в тексте с мелкой буквы
+    for (elem in substrings) { //*все строки идут как ключи
+        result.put(elem.toLowerCase(), 0)
+    }
+
+    for (str in File(inputName).readLines()) { {
+
+
+    for (line in text) {
+        for ((key) in result) {
+            if (result[key].toString() in line) {
+                if (line.toString() == key) {
+                    var a = result[key]
+                    if (a != null) {
+                        a += 1
+                        result[key] = a
+                    }
+                }
+            }
+        }
+    }
+    return result
+}**/
 
 
 /**
@@ -99,23 +123,6 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String): Nothing = TODO()
-/*{
-    val writer = File(outputName).bufferedWriter()
-    val consonantLetter = setOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
-    val vowelLetter = mapOf('ы' to "и", 'я' to "а", 'ю' to "у", 'Ы' to "И", 'Я' to "А", 'Ю' to "У")
-    for (line in File(inputName).readLines()) {
-        val theFirstNumber = line[0].toString()
-        writer.write(line[0])
-
-
-        }
-        writer.write(s)
-        writer.newLine() }
-
-
-}
-writer.close()
-}*/
 
 
 /**
@@ -135,9 +142,8 @@ writer.close()
  * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
  *
  */
-fun centerFile(inputName: String, outputName: String) {
-    TODO()
-}
+fun centerFile(inputName: String, outputName: String): Nothing = TODO()
+
 
 /**
  * Сложная (20 баллов)

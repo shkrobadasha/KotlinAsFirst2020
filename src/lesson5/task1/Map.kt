@@ -145,11 +145,7 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
  * В выходном списке не должно быть повторяющихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
-    a.toSet()
-    b.toSet()
-    return a.intersect(b).toList()
-}
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
 
 
 /**
@@ -172,9 +168,6 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
 
 fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
     val result = mutableMapOf<String, String>()
-    for ((name, phoneNumber) in mapA) {
-        result[name] = phoneNumber
-    }
     result.putAll(mapB)
     for ((name, phoneNumber) in mapA) {
         if (result[name] != null && phoneNumber != result[name]) {
@@ -238,24 +231,7 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
  * Например:
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
-fun canBuildFrom(chars: List<Char>, word: String): Boolean {
-    if (word == "") return true
-
-    val stringSymbol = mutableListOf<Char>()
-    for (i in 0 until word.length) {
-        stringSymbol.add(word[i].lowercaseChar())
-    }
-
-    val smallLetters = mutableListOf<Char>()
-    for (i in 0 until chars.size) {
-        smallLetters.add(chars[i].toChar().lowercaseChar())
-    }
-
-    for (j in stringSymbol.toSet()) {
-        if (j !in smallLetters.toSet()) return false
-    }
-    return true
-}
+fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
 
 /**
  * Средняя (4 балла)
