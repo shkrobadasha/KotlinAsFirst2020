@@ -142,6 +142,9 @@ fun bestLongJump(jumps: String): Int {
  * вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
+    if (jumps.contains(Regex("""[^\d\s\-%+]"""))){
+        return -1
+    }
 
     val parts = jumps.split(" ")
     var result = -1

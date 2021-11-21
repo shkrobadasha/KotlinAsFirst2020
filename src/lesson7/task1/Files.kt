@@ -2,6 +2,7 @@
 
 package lesson7.task1
 
+import kotlinx.html.ButtonFormMethod
 import java.io.File
 
 // Урок 7: работа с файлами
@@ -83,30 +84,6 @@ fun deleteMarked(inputName: String, outputName: String) {
  *
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
-    /**val result = mutableMapOf<String, Int>()
-    val text = File(inputName).readText().toLowerCase() //*все предложения в тексте с мелкой буквы
-    for (elem in substrings) { //*все строки идут как ключи
-        result.put(elem.toLowerCase(), 0)
-    }
-
-    for (str in File(inputName).readLines()) { {
-
-
-    for (line in text) {
-        for ((key) in result) {
-            if (result[key].toString() in line) {
-                if (line.toString() == key) {
-                    var a = result[key]
-                    if (a != null) {
-                        a += 1
-                        result[key] = a
-                    }
-                }
-            }
-        }
-    }
-    return result
-}**/
 
 
 /**
@@ -122,7 +99,29 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  * Исключения (жюри, брошюра, парашют) в рамках данного задания обрабатывать не нужно
  *
  */
-fun sibilants(inputName: String, outputName: String): Nothing = TODO()
+fun sibilants(inputName: String, outputName: String) {
+
+    val vowels = listOf("ы", "Ы", "я", "Я", "ю", "Ю")
+    val correctVowels = listOf("и", "И", "а", "А", "у", "У")
+    val consonant = listOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
+    val writer = File(outputName).bufferedWriter()
+    for (line in File(inputName).readLines()) {
+        writer.write(line[0].toString())
+        val strOfLetters = buildString {
+            for (i in 1..line.length - 1) {
+                if (vowels.contains(line[i].toString()) && consonant.contains(line[i - 1].toString())) {
+                    val indexx = vowels.indexOf(line[i].toString())
+                    append(correctVowels[indexx])
+                } else {
+                    append(line[i].toString())
+                }
+            }
+        }
+        writer.write(strOfLetters)
+        writer.newLine()
+    }
+    writer.close()
+}
 
 
 /**
@@ -262,7 +261,32 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    var sizes = -1
+    val mapForLongest = mutableMapOf<String, Int>()
+    for (line in File(inputName).readLines()) {
+        val word = line.lowercase().toCharArray().toSet()
+        if (word.size == line.length && line.length >= sizes) {
+            sizes = line.length//найдем наибольшую длину
+            mapForLongest[line.toString()] = sizes
+        }
+    }
+    var end = ""
+    for ((nameq) in mapForLongest) {
+        end = nameq
+    }
+    val result = buildString {
+        for ((name, len) in mapForLongest) {
+            if (len == sizes && name != end) {
+                append(name)
+                append(", ")
+            } else {
+                append(name)
+            }
+        }
+    }
+    writer.write(result)
+    writer.close()
 }
 
 /**
@@ -480,4 +504,3 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     TODO()
 }
-
