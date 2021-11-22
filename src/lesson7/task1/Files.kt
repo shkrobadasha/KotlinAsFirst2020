@@ -276,9 +276,11 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     for ((nameq) in mapForLongest) {
         end.add(nameq)
     }
-    res += end[0]
-    for (i in 1..end.size - 1) {
-        res += ", " + end[i]
+    if (end.size != 0) {
+        res += end[0]
+        for (i in 1..end.size - 1) {
+            res += ", " + end[i]
+        }
     }
     writer.write(res)
     writer.close()
