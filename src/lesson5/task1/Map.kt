@@ -167,18 +167,17 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
  */
 
 fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
-    val result = mutableMapOf<String, String>()
-    result.putAll(mapB)
-    for ((name, phoneNumber) in mapA) {
+    val result = mapA.toMutableMap()
+    for ((name, phoneNumber) in mapB) {
         if (result[name] != null && phoneNumber != result[name]) {
-            val q = "$phoneNumber, ${result[name]}"
-            result[name] = q
+            result[name] += ", $phoneNumber"
 
+        } else {
+            result[name] = phoneNumber
         }
     }
     return result
 }
-
 
 
 /**
@@ -246,33 +245,33 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
 fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
-    /**val res = mutableListOf<String>()
-    val result = mutableMapOf<String, Int>()
-    for (q in 0 until list.size) {
-        res.add(list[0])
-    }
+/**val res = mutableListOf<String>()
+val result = mutableMapOf<String, Int>()
+for (q in 0 until list.size) {
+res.add(list[0])
+}
 
-    for (el in list) {
-        if (el !in res) {
-            res.add(el)
-        }
-    }
-    list.sorted()
-    for (i in 1 until list.size) {
+for (el in list) {
+if (el !in res) {
+res.add(el)
+}
+}
+list.sorted()
+for (i in 1 until list.size) {
 
-        while (list[i] == list[i+1])
-        var count = 0
-        if (res.contains(list[i])) {
-            count++
-        }
+while (list[i] == list[i+1])
+var count = 0
+if (res.contains(list[i])) {
+count++
+}
 
 
 
-        if (count > 1) {
-            result.put(list[i], count)
-        }
-    }
-    return result
+if (count > 1) {
+result.put(list[i], count)
+}
+}
+return result
 }**/
 
 /**
@@ -353,22 +352,19 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     }
     for (i in list.indices) {
         if ((number - list[i]) in result && (i != result.getValue(number - list[i]))) {
-            return Pair(i,result.getValue(number - list[i]))
+            return Pair(i, result.getValue(number - list[i]))
         }
     }
     return Pair(-1, -1)
 }
 
 
-
-
-
-  /**  for (i in list.indices) {
-        if (number - list[i] in result) {
-            return Pair(result.getValue(number - list[i]), i)
-        }else result[list[i]] = i
-    }
-    return Pair(-1, -1)**/
+/**  for (i in list.indices) {
+if (number - list[i] in result) {
+return Pair(result.getValue(number - list[i]), i)
+}else result[list[i]] = i
+}
+return Pair(-1, -1)**/
 
 /**
  * Очень сложная (8 баллов)
