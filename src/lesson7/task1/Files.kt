@@ -271,10 +271,11 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
             mapForLongest[line.toString()] = sizes
         }
     }
-    val end = mutableListOf<String>()
+    println(mapForLongest)
+
     var res = ""
     for ((nameq) in mapForLongest) {
-        if ( nameq.length == sizes) {
+        if (nameq.length == sizes) {
             if (res == "") {
                 res += nameq
             } else
