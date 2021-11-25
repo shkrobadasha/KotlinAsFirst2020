@@ -141,7 +141,58 @@ fun sibilants(inputName: String, outputName: String) {
  * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
  *
  */
-fun centerFile(inputName: String, outputName: String): Nothing = TODO()
+
+/**fun lenOfString(string: Char): Int {
+val str = string.toString().split("")
+var count = 0
+for (el in str) {
+if (el != "") count++
+}
+return count
+}*/
+
+fun centerFile(inputName: String, outputName: String): Nothing {
+    TODO()
+
+}
+/**
+//найти самую длинную строку *не берем в учет пробелы
+// потом пишем если эта строка без пробело в больше макс то макс равно
+//потом идем по списку(цикл уже с изменяемым) и если длина строки не такая как макс то добавляем в начало пробелы
+//пока она не станет такой же
+var theLongestLine = 0
+//нашли самую длинную строку
+for (line in File(inputName).readLines().toString()) {
+val l = lenOfString(line)
+if (l > theLongestLine) {
+theLongestLine = l
+}
+}
+val writer = File(outputName).bufferedWriter()
+for (str in File(outputName).readLines().toString()) {
+var raz = (theLongestLine - lenOfString(str))/2
+while (raz > 0) {
+writer.write(" ")
+raz--
+}
+writer.write(str)
+}
+
+}
+
+}
+var temp = (max - line.trim().length) / 2
+while (temp > 0) {
+outputStream.write(" ")
+temp--
+}
+outputStream.write(line.trim())
+outputStream.newLine()
+}
+outputStream.close()
+}
+или через шаблон regex(если та штука содержится в строке то смотрим ее длину и все такое
+)*/
 
 
 /**

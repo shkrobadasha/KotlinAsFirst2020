@@ -58,6 +58,7 @@ class Tests {
     @Test
     @Tag("4")
     fun flattenPhoneNumber() {
+        assertEquals("123456798", flattenPhoneNumber("12 --  34- 5 -- 67 -98"))
         assertEquals("+79211234567", flattenPhoneNumber("+7 (921) 123-45-67"))
         assertEquals("123456798", flattenPhoneNumber("12 --  34- 5 -- 67 -98"))
         assertEquals("+12345", flattenPhoneNumber("+12 (3) 4-5"))
@@ -71,10 +72,11 @@ class Tests {
     @Test
     @Tag("5")
     fun bestLongJump() {
-        assertEquals(717, bestLongJump("706 % - 717 - 703"))
+
         assertEquals(-1, bestLongJump("% - - % -"))
         assertEquals(754, bestLongJump("700 717 707 % 754"))
         assertEquals(-1, bestLongJump("700 + 700"))
+        assertEquals(717, bestLongJump("706 % - 717 - 703"))
 
     }
 
