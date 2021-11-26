@@ -131,7 +131,6 @@ fun bestLongJump(jumps: String): Int {
 }
 
 
-
 /**
  * Сложная (6 баллов)
  *
@@ -217,7 +216,26 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    if (description == "") {
+        return ""
+    }
+    val list = description.split("; ")
+    val mapOfThings = mutableMapOf<String, Double>()
+    for (el in list) {
+        val line = el.split(" ")
+        mapOfThings[line[0]] = line[1].toDouble()
+    }
+    var maxCost = -1.0
+    var ans = ""
+    for ((k, v) in mapOfThings) {
+        if (v > maxCost) {
+            ans = k
+            maxCost = v
+        }
+    }
+    return ans
+}
 
 
 /**
