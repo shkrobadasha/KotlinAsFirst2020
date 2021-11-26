@@ -235,17 +235,16 @@ fun factorize(n: Int): MutableList<Int> {
     var m = n
     var i = 2
     val result = mutableListOf<Int>()
-    if (isPrime(m)) {
-        result.add(m)
-    } else{
-        while (m > 1 && m != i - 1 && i <= (sqrt(n.toDouble()) + 1).toInt()) {
-            if (m % i == 0) {
-                result.add(i)
-                m /= i
-            } else {
-                i++
-            }
+    while (m > 1 && m != i - 1 && !isPrime(m)) {
+        if (m % i == 0) {
+            result.add(i)
+            m /= i
+        } else {
+            i++
         }
+    }
+    if (isPrime(m)){
+        result.add(m)
     }
     return result
 }

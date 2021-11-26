@@ -163,7 +163,7 @@ class Tests {
     @Test
     @Tag("3")
     fun factorize() {
-        assertEquals(listOf(3), factorize(3))
+        assertEquals(listOf(3, 119267), factorize(357801))
         assertEquals(listOf(2), factorize(2))
         assertEquals(listOf(3, 5, 5), factorize(75))
         assertEquals(listOf(2, 3, 3, 19), factorize(342))
@@ -172,7 +172,7 @@ class Tests {
     @Test
     @Tag("4")
     fun factorizeToString() {
-        assertEquals("2", factorizeToString(2))
+        assertEquals("2*2*2*3*5*6091", factorizeToString(730920))
         assertEquals("3*5*5", factorizeToString(75))
         assertEquals("2*3*3*19", factorizeToString(342))
         assertEquals("7*7*31*31*151*151", factorizeToString(1073676289))
