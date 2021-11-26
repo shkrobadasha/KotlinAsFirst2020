@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson3.task1.isPrime
 import kotlin.math.sqrt
 
 // Урок 4: списки
@@ -234,12 +235,16 @@ fun factorize(n: Int): MutableList<Int> {
     var m = n
     var i = 2
     val result = mutableListOf<Int>()
-    while (m > 1 && m != i - 1 && i <= (sqrt(n.toDouble()) + 1).toInt()) {
-        if (m % i == 0) {
-            result.add(i)
-            m /= i
-        } else {
-            i++
+    if (isPrime(m)) {
+        result.add(m)
+    } else{
+        while (m > 1 && m != i - 1 && i <= (sqrt(n.toDouble()) + 1).toInt()) {
+            if (m % i == 0) {
+                result.add(i)
+                m /= i
+            } else {
+                i++
+            }
         }
     }
     return result
@@ -270,7 +275,7 @@ fun factorizeToString(n: Int): String {
 fun convert(n: Int, base: Int): List<Int> {
     var m = n
     val result = mutableListOf<Int>()
-    if (m == 0){
+    if (m == 0) {
         result.add(0)
     }
     while (m != 0) {
@@ -355,9 +360,11 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
 fun roman(n: Int): String {
     val result = StringBuilder()
     var m = n
-    val mapOfNumbers = mapOf("M" to 1000, "CM" to 900, "D" to 500, "CD" to 400, "C" to 100,
-        "XC" to 90, "L" to 50, "XL" to 40, "X" to 10, "IX" to 9, "V" to 5, "IV" to 4, "I" to 1)
-    for ((key, value) in mapOfNumbers){
+    val mapOfNumbers = mapOf(
+        "M" to 1000, "CM" to 900, "D" to 500, "CD" to 400, "C" to 100,
+        "XC" to 90, "L" to 50, "XL" to 40, "X" to 10, "IX" to 9, "V" to 5, "IV" to 4, "I" to 1
+    )
+    for ((key, value) in mapOfNumbers) {
         while (m - value >= 0) {
             m -= value
             result.append(key)
