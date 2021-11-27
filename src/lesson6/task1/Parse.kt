@@ -212,16 +212,21 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * Все цены должны быть больше нуля либо равны нулю.
  */
 fun mostExpensive(description: String): String {
-    val reg = Regex("""[А-Яа-яA-za-z]+\s\d+(\.\d+)?(;\s[А-Яа-яA-Za-z]+\s\d+(\.\d+)?)*""")
-    if (!reg.matches(description)) {
+    if (description.isEmpty()) {
         return ""
     }
+
     val list = description.split("; ")
     val mapOfThings = mutableMapOf<String, Double>()
     for (el in list) {
         val line = el.split(" ")
-        mapOfThings[line[0]] = line[1].toDouble()
+        if (!line.contains(";") && line.size == 2){
+            val key = line[0]
+            val value = line[1].toDoubleOrNull() ?: return ""
+            mapOfThings[key] = value
+        }
     }
+
     var maxCost = -1.0
     var ans = ""
     for ((k, v) in mapOfThings) {
@@ -232,7 +237,6 @@ fun mostExpensive(description: String): String {
     }
     return ans
 }
-
 
 /**
  * Сложная (6 баллов)
