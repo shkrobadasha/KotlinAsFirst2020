@@ -212,7 +212,8 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * Все цены должны быть больше нуля либо равны нулю.
  */
 fun mostExpensive(description: String): String {
-    if (description.isEmpty()) {
+    val reg = Regex("""[А-Яа-я]+\s\d+(\.\d+)?(;\s[А-Яа-я]+\s\d+(\.\d+)?)*""")
+    if (!reg.matches(description)) {
         return ""
     }
     val list = description.split("; ")
@@ -283,3 +284,6 @@ fun fromRoman(roman: String): Int = TODO()
  *
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
+
+
+
