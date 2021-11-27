@@ -73,6 +73,7 @@ class Tests {
     @Tag("5")
     fun bestLongJump() {
 
+        assertEquals(123, bestLongJump("123 -"))
         assertEquals(-1, bestLongJump("% - - % -"))
         assertEquals(754, bestLongJump("700 717 707 % 754"))
         assertEquals(-1, bestLongJump("700 + 700"))
