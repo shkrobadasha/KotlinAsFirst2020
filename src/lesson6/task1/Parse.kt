@@ -107,7 +107,7 @@ fun dateDigitToStr(digital: String): String = TODO()
 fun flattenPhoneNumber(phone: String): String {
     var res = ""
     val reg = Regex("""(\+\d+)?[\s\-]*(\(\d+[\d+\-\s]*\))?[\d+\s\-]*""")
-    if (!reg.matches(phone)) {
+    if (!reg.matches(phone) || phone.isEmpty()) {
         return res
     }
     val regForStr = Regex("""[\d\+]""")
@@ -212,7 +212,6 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в') */
 
 fun firstDuplicateIndex(str: String): Int = TODO()
-
 
 /**
  * Сложная (6 баллов)
