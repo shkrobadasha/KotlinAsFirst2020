@@ -234,7 +234,7 @@ fun mostExpensive(description: String): String {
     val mapOfThings = mutableMapOf<String, Double>()
     for (el in list) {
         val line = el.split(" ")
-        if (!line.contains(";") && line.size == 2){
+        if (!line.contains(";")&& line.size == 2){
             val key = line[0]
             val value = line[1].toDoubleOrNull() ?: return ""
             mapOfThings[key] = value
