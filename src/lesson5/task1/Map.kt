@@ -359,13 +359,6 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
 }
 
 
-/**  for (i in list.indices) {
-if (number - list[i] in result) {
-return Pair(result.getValue(number - list[i]), i)
-}else result[list[i]] = i
-}
-return Pair(-1, -1)**/
-
 /**
  * Очень сложная (8 баллов)
  *

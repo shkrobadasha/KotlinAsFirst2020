@@ -112,8 +112,8 @@ fun flattenPhoneNumber(phone: String): String {
     }
     val regForStr = Regex("""[\d\+]""")
     if (regForStr.matches(phone[0].toString())) res += phone[0]
-    for (i in 1 until phone.length){
-        if (regForStr.matches(phone[i].toString()) && phone[i].toString() != "+"){
+    for (i in 1 until phone.length) {
+        if (regForStr.matches(phone[i].toString()) && phone[i].toString() != "+") {
             res += phone[i]
         }
     }
@@ -131,7 +131,7 @@ fun flattenPhoneNumber(phone: String): String {
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
-    val reg = Regex("""\d+[\d\s\-%]*""")
+    val reg = Regex("""\d+(\s([\d\-%])*)*""".trimMargin())
     if (!reg.matches(jumps)) {
         return -1
     }
@@ -157,7 +157,7 @@ fun bestLongJump(jumps: String): Int {
  * вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
-    if (jumps.contains(Regex("""[^\d\s\-%+]"""))) {
+    if (jumps.contains(Regex("""(\d+[-%+]) | ([-%+]\d+)"""))) {
         return -1
     }
     val parts = jumps.split(" ")
@@ -185,7 +185,7 @@ fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     for (w in 0 until parts.size) {
         val numb = parts[w]
-        if ((numb.matches(Regex("""(\d)+""")) && w % 2 == 0 && numb.toInt() >= 0)
+        if ((numb.matches(Regex("""(\d)*\d""")) && w % 2 == 0 && numb.toInt() >= 0)
             || (w % 2 != 0 && (numb == "+"
                     || numb == "-"))
         )
@@ -212,6 +212,25 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в') */
 
 fun firstDuplicateIndex(str: String): Int = TODO()
+/**{
+val line = str.split(" ")
+var indOfTwin = -1
+var sum = mutableListOf<String>()
+var counter = -1
+for (i in 0 until line.size-1) {
+if (line[i] != line[i + 1]) {
+sum.add(line[i].split("").toString())
+sum.add(" ")
+counter++
+}
+println(sum)
+if (counter > 0){
+indOfTwin == -1
+
+}
+}
+return -1
+}**/
 
 /**
  * Сложная (6 баллов)
@@ -228,18 +247,16 @@ fun mostExpensive(description: String): String {
     if (description.isEmpty()) {
         return ""
     }
-
     val list = description.split("; ")
     val mapOfThings = mutableMapOf<String, Double>()
     for (el in list) {
         val line = el.split(" ")
-        if (!line.contains(";")&& line.size == 2){
+        if (!line.contains(";") && line.size == 2) {
             val key = line[0]
             val value = line[1].toDoubleOrNull() ?: return ""
             mapOfThings[key] = value
         }
     }
-
     var maxCost = -1.0
     var ans = ""
     for ((k, v) in mapOfThings) {

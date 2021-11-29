@@ -345,7 +345,6 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-
 fun decimalFromString(str: String, base: Int): Int = TODO()
 
 /**
