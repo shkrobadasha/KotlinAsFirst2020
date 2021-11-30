@@ -150,8 +150,8 @@ fun bestHighJump(jumps: String): Int {
     //println(parts)
     val reg = Regex("""[0-9%+-]+""")
     val regOfStr = Regex("""(\d+[%+-]+) | ([%+-]+\d+) """)
-    for (i in parts.indices){
-        if (!parts[i].contains(reg) || parts[i].contains(regOfStr)){
+    for (i in parts.indices) {
+        if (!parts[i].contains(reg) || parts[i].contains(regOfStr)) {
             return -1
         } else {
             if (parts[i] == plas) {
@@ -176,10 +176,10 @@ fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     for (w in parts.indices) {
         val numb = parts[w]
-        if (parts.size % 2 != 0 && (numb.matches(Regex("""\d+"""))
+        if (parts.size % 2 != 0 && ((numb.matches(Regex("""\d+"""))
                     && w % 2 == 0 && numb.toInt() >= 0)
-            || (w % 2 != 0 && (numb == "+"
-                    || numb == "-"))
+                    || (w % 2 != 0 && (numb == "+"
+                    || numb == "-")))
         )
             continue
         else throw IllegalArgumentException(expression)
@@ -204,6 +204,7 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в') */
 
 fun firstDuplicateIndex(str: String): Int = TODO()
+
 /**{
 val line = str.split(" ")
 var indOfTwin = -1
