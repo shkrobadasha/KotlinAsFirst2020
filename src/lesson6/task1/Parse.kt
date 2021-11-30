@@ -134,7 +134,7 @@ fun bestLongJump(jumps: String): Int {
     val parts = jumps.split(" ").toList()
     var result = -1
     val reg = Regex("""[\d%-]""")
-    val regOfStr = Regex("""(\d+[%-]+)|([-%]+\d+)""")//проверка на пробелы
+    val regOfStr = Regex("""(\d+[%-]+)|([-%]+\d+)""")
     for (i in parts.indices){
         if (!parts[i].contains(reg) || parts[i].contains(regOfStr)){
             return -1
