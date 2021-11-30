@@ -131,15 +131,17 @@ fun flattenPhoneNumber(phone: String): String {
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
-    val reg = Regex("""\d+(\s([\d\-%])*)*""".trimMargin())
-    if (!reg.matches(jumps)) {
-        return -1
-    }
-    val parts = jumps.split(" ")
+    val parts = jumps.split(" ").toList()
     var result = -1
-    for (part in parts) {
-        if (part == "-" || part == "%") continue
-        if (part.toInt() > result) result = part.toInt()
+    val reg = Regex("""[\d%-]""")
+    val regOfStr = Regex("""(\d+[%-]+)|([-%]+\d+)""")//проверка на пробелы
+    for (i in parts.indices){
+        if (!parts[i].contains(reg) || parts[i].contains(regOfStr)){
+            return -1
+        } else {
+            if (parts[i] == "-" || parts[i] == "%") continue
+            if (parts[i].toInt() > result) result = parts[i].toInt()
+        }
     }
     return result
 }
@@ -157,15 +159,19 @@ fun bestLongJump(jumps: String): Int {
  * вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
-    if (jumps.contains(Regex("""(\d+[-%+]) | ([-%+]\d+)"""))) {
-        return -1
-    }
-    val parts = jumps.split(" ")
+    val parts = jumps.split(" ").toList()
     var result = -1
     val plas = "+"
-    for (i in 1 until parts.size) {
-        if (parts[i].contains(plas)) {
-            if (parts[i - 1].toInt() > result) result = parts[i - 1].toInt()
+    //println(parts)
+    val reg = Regex("""[0-9%+-]+""")
+    val regOfStr = Regex("""(\d+[%+-]+) | ([%+-]+\d+) """)
+    for (i in parts.indices){
+        if (!parts[i].contains(reg) || parts[i].contains(regOfStr)){
+            return -1
+        } else {
+            if (parts[i] == plas) {
+                if (parts[i - 1].toInt() > result) result = parts[i - 1].toInt()
+            }
         }
     }
     return result
@@ -185,7 +191,8 @@ fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     for (w in 0 until parts.size) {
         val numb = parts[w]
-        if ((numb.matches(Regex("""(\d)*\d""")) && w % 2 == 0 && numb.toInt() >= 0)
+        if (parts.size % 2 != 0 && (numb.matches(Regex("""\d+"""))
+                    && w % 2 == 0 && numb.toInt() >= 0)
             || (w % 2 != 0 && (numb == "+"
                     || numb == "-"))
         )

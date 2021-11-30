@@ -191,6 +191,24 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
 fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+/**val result = mutableMapOf<String, Double>()
+var str = "q"
+for (el in stockPrices.indices) {
+str = stockPrices.first().toString()
+var sum = 0
+var count = 0.0
+for ((name, coast) in result) {
+if (name == str) {
+//sum += stockPrices.second()
+count++
+}
+}
+}
+return result//не надр
+}*/
+//зададим i значение будем идти и смотреть,что если
+// нет такого ключа как лист1i то добавляем его в карту и идем по массиву у кого первое такое значение как ключ
+// мы добавим в сумму,которая копится и  счетчик +1 и потом делаем i +1
 
 
 /**
