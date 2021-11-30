@@ -132,7 +132,6 @@ fun flattenPhoneNumber(phone: String): String {
  */
 fun bestLongJump(jumps: String): Int = TODO()
 
-
 /**
  * Сложная (6 баллов)
  *
@@ -175,7 +174,7 @@ fun bestHighJump(jumps: String): Int {
 
 fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
-    for (w in 0 until parts.size) {
+    for (w in parts.indices) {
         val numb = parts[w]
         if (parts.size % 2 != 0 && (numb.matches(Regex("""\d+"""))
                     && w % 2 == 0 && numb.toInt() >= 0)
