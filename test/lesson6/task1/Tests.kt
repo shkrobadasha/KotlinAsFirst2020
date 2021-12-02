@@ -1,5 +1,6 @@
 package lesson6.task1
 
+import lesson4.task1.decimalFromString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Tag

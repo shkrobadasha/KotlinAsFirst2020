@@ -83,7 +83,27 @@ fun deleteMarked(inputName: String, outputName: String) {
  * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
  *
  */
-fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
+fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
+    val reader = File(inputName).bufferedReader()
+    val text = reader.readText().lowercase()
+    val result = mutableMapOf<String, Int>()
+    substrings.forEach { string ->
+        var count = 0
+        var i = 0
+        while (i < text.length) {
+            val goTo = text.indexOf(string, i, true)
+            if (goTo != -1) {
+                count++
+                i = goTo + 1
+            } else {
+                i++
+            }
+        }
+        result[string] = count
+    }
+    return result
+}
+
 
 
 /**
@@ -311,7 +331,8 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  *
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
-fun chooseLongestChaoticWord(inputName: String, outputName: String) {
+fun chooseLongestChaoticWord(inputName: String, outputName: String)= TODO()
+/**{
     val writer = File(outputName).bufferedWriter()
     var sizes = -1
     val mapForLongest = mutableMapOf<String, Int>()
@@ -319,7 +340,7 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
         val word = line.lowercase().toCharArray().toSet()
         if (word.size == line.length && line.length >= sizes) {
             sizes = line.length//найдем наибольшую длину
-            mapForLongest[line.toString()] = sizes
+            mapForLongest[line] = sizes
         }
     }
     println(mapForLongest)
@@ -335,7 +356,7 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     }
     writer.write(res)
     writer.close()
-}
+}**/
 
 /**
  * Сложная (22 балла)
