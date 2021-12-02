@@ -105,7 +105,6 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
 }
 
 
-
 /**
  * Средняя (12 баллов)
  *
@@ -331,31 +330,35 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  *
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
-fun chooseLongestChaoticWord(inputName: String, outputName: String)= TODO()
-/**{
-    val writer = File(outputName).bufferedWriter()
-    var sizes = -1
-    val mapForLongest = mutableMapOf<String, Int>()
-    for (line in File(inputName).readLines()) {
-        val word = line.lowercase().toCharArray().toSet()
-        if (word.size == line.length && line.length >= sizes) {
-            sizes = line.length//найдем наибольшую длину
-            mapForLongest[line] = sizes
-        }
-    }
-    println(mapForLongest)
 
-    var res = ""
-    for ((nameq) in mapForLongest) {
-        if (nameq.length == sizes) {
-            if (res == "") {
-                res += nameq
-            } else
-                res += ", $nameq"
-        }
-    }
-    writer.write(res)
-    writer.close()
+fun chooseLongestChaoticWord(inputName: String, outputName: String) {
+    TODO()
+}
+
+/**{
+val writer = File(outputName).bufferedWriter()
+var sizes = -1
+val mapForLongest = mutableMapOf<String, Int>()
+for (line in File(inputName).readLines()) {
+val word = line.lowercase().toCharArray().toSet()
+if (word.size == line.length && line.length >= sizes) {
+sizes = line.length//найдем наибольшую длину
+mapForLongest[line] = sizes
+}
+}
+println(mapForLongest)
+
+var res = ""
+for ((nameq) in mapForLongest) {
+if (nameq.length == sizes) {
+if (res == "") {
+res += nameq
+} else
+res += ", $nameq"
+}
+}
+writer.write(res)
+writer.close()
 }**/
 
 /**
