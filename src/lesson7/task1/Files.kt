@@ -313,34 +313,31 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  */
 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
-    TODO()
-}
+    val writer = File(outputName).bufferedWriter()
+    var sizes = -1
+    val mapForLongest = mutableListOf<Pair<String, Int>>()
+    for (line in File(inputName).readLines()) {
+        val word = line.lowercase().toCharArray().toSet()
+        if (word.size == line.length && line.length >= sizes) {
+            sizes = line.length//найдем наибольшую длину
+            mapForLongest.add(line to sizes)
+        }
+    }
+    //println(mapForLongest)
 
-/**{
-val writer = File(outputName).bufferedWriter()
-var sizes = -1
-val mapForLongest = mutableMapOf<String, Int>()
-for (line in File(inputName).readLines()) {
-val word = line.lowercase().toCharArray().toSet()
-if (word.size == line.length && line.length >= sizes) {
-sizes = line.length//найдем наибольшую длину
-mapForLongest[line] = sizes
+    var res = ""
+    for ((nameq) in mapForLongest) {
+        //println(nameq)
+        if (nameq.length == sizes) {
+            if (res == "") {
+                res += nameq
+            } else
+                res += ", $nameq"
+        }
+    }
+    writer.write(res)
+    writer.close()
 }
-}
-println(mapForLongest)
-
-var res = ""
-for ((nameq) in mapForLongest) {
-if (nameq.length == sizes) {
-if (res == "") {
-res += nameq
-} else
-res += ", $nameq"
-}
-}
-writer.write(res)
-writer.close()
-}**/
 
 /**
  * Сложная (22 балла)
