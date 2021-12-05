@@ -2,6 +2,7 @@
 
 package lesson1.task1
 
+import java.lang.IllegalArgumentException
 import kotlin.math.*
 
 // Урок 1: простые функции
@@ -49,13 +50,6 @@ fun quadraticRootProduct(a: Double, b: Double, c: Double): Double {
     return x1 * x2 // Результат
 }
 
-/**
- * Пример главной функции
- */
-fun main() {
-    val x1x2 = quadraticRootProduct(1.0, 13.0, 42.0)
-    println("Root product: $x1x2")
-}
 
 /**
  * Тривиальная (3 балла).
@@ -133,4 +127,50 @@ fun numberRevert(number: Int): Int {
     val t = number % 10
     val v = number % 100 / 10
     return t * 100 + v * 10 + p
+}
+
+fun chubby(addresses: List<String>): Map<String, List<String>> {
+    val short = mutableMapOf<String, String>()
+    val result = mutableMapOf<String, List<String>>()
+    for (el in addresses) {
+        val between = el.split(": ")
+        if (!between[0].matches(Regex("""[А-Яа-я]+ [А-Яа-я]+""")))
+            throw IllegalArgumentException("Что-то пошло не так")
+        val address = between[1].split(", ")
+        if (!address[0].matches(Regex("""[А-Яа-я ]+""")))
+            throw IllegalArgumentException("Что-то пошло не так")
+        short[between[0] + " " + address[0]] = el
+        if (!address[1].matches(Regex("""\d+""")))
+            throw IllegalArgumentException("Что-то пошло не так")
+        val house = address[2].split(" ")
+        if (house[0] != "кв." || !house[1].matches(Regex("""\d+""")))
+            throw IllegalArgumentException("Что-то пошло не так")
+    }
+    val different = mutableSetOf<String>()
+    for ((key, value) in short) {
+        different.add(key)
+    }
+    for (el in different) {
+        val listik = mutableListOf<String>()
+        var i = 0
+        for ((key, value) in short) {
+            if (el == key) {
+                listik.add(value)
+                i += 1
+            }
+        }
+        if (i > 1) result[el] = listik
+    }
+    print(result)
+    return result
+}
+
+fun main() {
+    chubby(
+        listOf(
+            "Иванов Петр: улица Ленина, 41, кв. 2", "Иванов Петр: улица Ленина, 28, кв. 13",
+            "Советова Ульяна: улица Пушкина, 20, кв. 7", "Советова Ульяна: улица Ленина, 28, кв. 15",
+            "Иванов Петр: улица Пушкина, 29, кв. 10"
+        )
+    )
 }

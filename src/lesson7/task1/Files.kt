@@ -2,6 +2,7 @@
 
 package lesson7.task1
 
+import lesson3.task1.digitNumber
 import java.io.File
 
 // Урок 7: работа с файлами
@@ -63,14 +64,15 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  * Подчёркивание в середине и/или в конце строк значения не имеет.
  */
 fun deleteMarked(inputName: String, outputName: String) {
-    val writer = File(outputName).bufferedWriter()
-    for (str in File(inputName).readLines()) {
-        if (str.isEmpty() || str.first() != '_') {
-            writer.write(str)
-            writer.newLine()
+    val writer = File(outputName).bufferedWriter().use {
+        for (str in File(inputName).readLines()) {
+            if (str.isEmpty() || str.first() != '_') {
+                it.write(str)
+                it.newLine()
+            }
         }
     }
-    writer.close()
+
 }
 
 /**
@@ -441,21 +443,68 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
  * Вывести в выходной файл процесс деления столбиком числа lhv (> 0) на число rhv (> 0).
  *
  * Пример (для lhv == 19935, rhv == 22):
-19935 | 22
--198     906
-----
-13
--0
---
-135
--132
-----
-3
-
+ *
  * Используемые пробелы, отступы и дефисы должны в точности соответствовать примеру.
  *
  */
+// 19935 | 22
+//-198     906
+//----
+//   13
+//   -0
+//   --
+//   135
+//  -132
+//  ----
+//     3
+
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    val quotient = lhv / rhv
+    val remainder = lhv % rhv
+    val lhv0 = lhv.toString()
+    val q0 = quotient.toString()
+    var cur = q0[0].toString().toInt() * rhv
+    var len = lhv0.length + 3
+    var curlhv = lhv0.substring(0, digitNumber(cur))
+    var next = digitNumber(cur) - 1
+    var sub = ""
+    var prefix = ""
+    var currem = curlhv.toInt() - cur
+    if (currem < 0) {
+        writer.write("$lhv | $rhv")
+        curlhv += lhv0[digitNumber(cur) + 1]
+        currem = curlhv.toInt() - cur
+        next += 1
+    } else {
+        writer.write(" $lhv | $rhv")
+        len += 1
+    }
+    writer.newLine()
+    sub = " ".repeat((len - cur.toString().length) - 1)
+    writer.write("-$cur$sub$q0")
+    writer.newLine()
+    writer.write("-".repeat(maxOf(curlhv.length, ("-$cur").length)))
+    writer.newLine()
+    prefix += " ".repeat(maxOf(curlhv.length, cur.toString().length + 1) - currem.toString().length)
+    writer.write(prefix + currem.toString())
+
+    for (i in 1 until q0.length) {
+        next += 1
+        writer.write(lhv0[next].toString())
+        writer.newLine()
+        cur = q0[i].toString().toInt() * rhv
+        curlhv = currem.toString() + lhv0[next]
+        currem = curlhv.toInt() - cur
+        if (curlhv.length - cur.toString().length < 1) prefix = prefix.substring(0, prefix.length - 1)
+        writer.write("$prefix-$cur")
+        writer.newLine()
+        writer.write(prefix + "-".repeat(maxOf(curlhv.length, ("-$cur").length)))
+        writer.newLine()
+        prefix += " ".repeat(maxOf(curlhv.length, cur.toString().length + 1) - currem.toString().length)
+        writer.write(prefix + currem.toString())
+    }
+
+    writer.close()
 }
 
