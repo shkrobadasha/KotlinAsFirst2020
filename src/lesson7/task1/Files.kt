@@ -495,7 +495,15 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         curlhv = currem.toString() + lhv0[next]
         currem = curlhv.toInt() - cur
         if (curlhv.length - cur.toString().length < 1) prefix = prefix.substring(0, prefix.length - 1)
-        writer.write("$prefix-$cur")
+        writer.write(
+            prefix +
+                    if (curlhv.length - cur.toString().length - 1 >= 0) {
+                        " ".repeat(curlhv.length - cur.toString().length - 1)
+                    } else {
+                        ""
+                    }
+                    + "-" + cur.toString()
+        )
         writer.newLine()
         writer.write(prefix + "-".repeat(maxOf(curlhv.length, ("-$cur").length)))
         writer.newLine()
