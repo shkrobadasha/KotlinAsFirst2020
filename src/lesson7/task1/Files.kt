@@ -465,7 +465,8 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     val q0 = quotient.toString()
     var cur = q0[0].toString().toInt() * rhv
     var len = lhv0.length + 3
-    var curlhv = lhv0.substring(0, digitNumber(cur))
+    var curlhv = if (cur == 0) lhv0
+    else lhv0.substring(0, digitNumber(cur))
     var next = digitNumber(cur) - 1
     var prefix = ""
     var currem = curlhv.toInt() - cur
@@ -475,12 +476,22 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         currem = curlhv.toInt() - cur
         next += 1
     } else {
-        writer.write(" $lhv | $rhv")
+        if (cur == 0 && curlhv.length > 1) writer.write("$lhv | $rhv")
+        else writer.write(" $lhv | $rhv")
         len += 1
     }
     writer.newLine()
-    val sub = " ".repeat((len - cur.toString().length) - 1)
-    writer.write("-$cur$sub$q0")
+    val sub = if (cur == 0) "   "
+    else " ".repeat((len - cur.toString().length) - 1)
+    //writer.write("-$cur$sub$q0")
+    writer.write(
+        if (curlhv.length - cur.toString().length - 1 >= 0) {
+            " ".repeat(curlhv.length - cur.toString().length - 1)
+        } else {
+            ""
+        }
+                + "-" + cur.toString() + sub + q0
+    )
     writer.newLine()
     writer.write("-".repeat(maxOf(curlhv.length, ("-$cur").length)))
     writer.newLine()
