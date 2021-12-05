@@ -64,7 +64,7 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  * Подчёркивание в середине и/или в конце строк значения не имеет.
  */
 fun deleteMarked(inputName: String, outputName: String) {
-    val writer = File(outputName).bufferedWriter().use {
+    File(outputName).bufferedWriter().use {
         for (str in File(inputName).readLines()) {
             if (str.isEmpty() || str.first() != '_') {
                 it.write(str)
@@ -461,14 +461,12 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val quotient = lhv / rhv
-    val remainder = lhv % rhv
     val lhv0 = lhv.toString()
     val q0 = quotient.toString()
     var cur = q0[0].toString().toInt() * rhv
     var len = lhv0.length + 3
     var curlhv = lhv0.substring(0, digitNumber(cur))
     var next = digitNumber(cur) - 1
-    var sub = ""
     var prefix = ""
     var currem = curlhv.toInt() - cur
     if (currem < 0) {
@@ -481,7 +479,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         len += 1
     }
     writer.newLine()
-    sub = " ".repeat((len - cur.toString().length) - 1)
+    val sub = " ".repeat((len - cur.toString().length) - 1)
     writer.write("-$cur$sub$q0")
     writer.newLine()
     writer.write("-".repeat(maxOf(curlhv.length, ("-$cur").length)))
