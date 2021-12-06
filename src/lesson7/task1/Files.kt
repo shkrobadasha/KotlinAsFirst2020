@@ -99,29 +99,28 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  * Исключения (жюри, брошюра, парашют) в рамках данного задания обрабатывать не нужно
  *
  */
-fun sibilants(inputName: String, outputName: String) {
-
-    val vowels = setOf("ы", "Ы", "я", "Я", "ю", "Ю")
-    val correctVowels = listOf("и", "И", "а", "А", "у", "У")
-    val consonant = setOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
-    val writer = File(outputName).bufferedWriter()
-    for (line in File(inputName).readLines()) {
-        writer.write(line[0].toString())
-        val strOfLetters = buildString {
-            for (i in 1..line.length - 1) {
-                if (vowels.contains(line[i].toString()) && consonant.contains(line[i - 1].toString())) {
-                    val indexx = vowels.indexOf(line[i].toString())
-                    append(correctVowels[indexx])
-                } else {
-                    append(line[i].toString())
-                }
-            }
-        }
-        writer.write(strOfLetters)
-        writer.newLine()
-    }
-    writer.close()
+fun sibilants(inputName: String, outputName: String) {}
+/**val vowels = setOf("ы", "Ы", "я", "Я", "ю", "Ю")
+val correctVowels = listOf("и", "И", "а", "А", "у", "У")
+val consonant = setOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
+val writer = File(outputName).bufferedWriter()
+for (line in File(inputName).readLines()) {
+writer.write(line[0].toString())
+val strOfLetters = buildString {
+for (i in 1..line.length - 1) {
+if (vowels.contains(line[i].toString()) && consonant.contains(line[i - 1].toString())) {
+val indexx = vowels.indexOf(line[i].toString())
+append(correctVowels[indexx])
+} else {
+append(line[i].toString())
 }
+}
+}
+writer.write(strOfLetters)
+writer.newLine()
+}
+writer.close()
+**/
 
 
 /**
@@ -323,19 +322,12 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
             mapForLongest.add(line to sizes)
         }
     }
-    //println(mapForLongest)
-
-    var res = ""
-    for ((nameq) in mapForLongest) {
-        //println(nameq)
-        if (nameq.length == sizes) {
-            if (res == "") {
-                res += nameq
-            } else
-                res += ", $nameq"
+    val res = buildString {
+        for ((nameq) in mapForLongest) {
+            append(", $nameq")
         }
     }
-    writer.write(res)
+    writer.write(res.substring(2, res.length))
     writer.close()
 }
 
@@ -385,7 +377,11 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    TODO()
+    /**val writer = File(outputName).bufferedWriter()
+    val text = File(inputName).readLines()
+    //вводим все необходимые штуки
+    writer.write("<html><body><p>")**/
+
 }
 
 /**
@@ -486,8 +482,20 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
 fun markdownToHtmlLists(inputName: String, outputName: String) {
-    TODO()
+    /*"""val writer = File(outputName).bufferedWriter()
+    val text = File(inputName).readLines()
+    val tegPoint = "<li>"
+    val tegForNumb = "<ol>"
+    val tegForUnNumb = "<ul>"
+    val indent = " ".repeat(4)
+
+    texty = "<html><body>Text</body></html>"
+    println(text)
+    writer.use {
+        writer.write(text)
+    }*/
 }
+
 
 /**
  * Очень сложная (30 баллов)

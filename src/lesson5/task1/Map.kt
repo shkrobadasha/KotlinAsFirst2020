@@ -173,7 +173,7 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
             result[name] += ", $phoneNumber"
 
         } else {
-            result[name] = phoneNumber
+            result[name] = phoneNumber//если значения с таким ключем еще нет
         }
     }
     return result
