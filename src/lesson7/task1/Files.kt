@@ -99,7 +99,9 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  * Исключения (жюри, брошюра, парашют) в рамках данного задания обрабатывать не нужно
  *
  */
-fun sibilants(inputName: String, outputName: String) {}
+fun sibilants(inputName: String, outputName: String) {
+    TODO()
+}
 /**val vowels = setOf("ы", "Ы", "я", "Я", "ю", "Ю")
 val correctVowels = listOf("и", "И", "а", "А", "у", "У")
 val consonant = setOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
@@ -120,7 +122,7 @@ writer.write(strOfLetters)
 writer.newLine()
 }
 writer.close()
-**/
+ **/
 
 
 /**
@@ -148,7 +150,7 @@ for (el in str) {
 if (el != "") count++
 }
 return count
-}*/
+}**/
 
 fun centerFile(inputName: String, outputName: String): Nothing {
     TODO()
@@ -322,12 +324,14 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
             mapForLongest.add(line to sizes)
         }
     }
-    val res = buildString {
-        for ((nameq) in mapForLongest) {
-            append(", $nameq")
+    if (!mapForLongest.isEmpty()) {
+        val res = buildString {
+            for ((nameq) in mapForLongest) {
+                append(", $nameq")
+            }
         }
+        writer.write(res.substring(2, res.length))
     }
-    writer.write(res.substring(2, res.length))
     writer.close()
 }
 
@@ -377,12 +381,13 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    /**val writer = File(outputName).bufferedWriter()
-    val text = File(inputName).readLines()
-    //вводим все необходимые штуки
-    writer.write("<html><body><p>")**/
-
+    TODO()
 }
+/**val writer = File(outputName).bufferedWriter()
+val text = File(inputName).readLines()
+//вводим все необходимые штуки
+writer.write("<html><body><p>")**/
+
 
 /**
  * Сложная (23 балла)
@@ -482,19 +487,20 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
 fun markdownToHtmlLists(inputName: String, outputName: String) {
-    /*"""val writer = File(outputName).bufferedWriter()
-    val text = File(inputName).readLines()
-    val tegPoint = "<li>"
-    val tegForNumb = "<ol>"
-    val tegForUnNumb = "<ul>"
-    val indent = " ".repeat(4)
-
-    texty = "<html><body>Text</body></html>"
-    println(text)
-    writer.use {
-        writer.write(text)
-    }*/
+    TODO()
 }
+/**"""val writer = File(outputName).bufferedWriter()
+val text = File(inputName).readLines()
+val tegPoint = "<li>"
+val tegForNumb = "<ol>"
+val tegForUnNumb = "<ul>"
+val indent = " ".repeat(4)
+
+texty = "<html><body>Text</body></html>"
+println(text)
+writer.use {
+writer.write(text)
+}**/
 
 
 /**
