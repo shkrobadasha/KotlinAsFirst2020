@@ -4,6 +4,7 @@ package lesson7.task1
 
 import kotlinx.html.ButtonFormMethod
 import java.io.File
+import kotlin.math.max
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -324,6 +325,15 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
             mapForLongest.add(line to sizes)
         }
     }
+
+
+    for (i in mapForLongest.indices){
+        if(mapForLongest[i].first.length != sizes){
+            mapForLongest.removeAt(i)
+        }
+    }
+
+
     if (!mapForLongest.isEmpty()) {
         val res = buildString {
             for ((nameq) in mapForLongest) {
