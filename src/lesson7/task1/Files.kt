@@ -2,9 +2,7 @@
 
 package lesson7.task1
 
-import kotlinx.html.ButtonFormMethod
 import java.io.File
-import kotlin.math.max
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -84,8 +82,9 @@ fun deleteMarked(inputName: String, outputName: String) {
  * Регистр букв игнорировать, то есть буквы е и Е считать одинаковыми.
  *
  */
-fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
-
+fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
+    TODO()
+}
 
 /**
  * Средняя (12 баллов)
@@ -103,17 +102,21 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
 fun sibilants(inputName: String, outputName: String) {
     TODO()
 }
-/**val vowels = setOf("ы", "Ы", "я", "Я", "ю", "Ю")
-val correctVowels = listOf("и", "И", "а", "А", "у", "У")
+/**val vowels = setOf("ы", "Ы""ы", "я", "Я", "ю", "Ю")
+val allVowels = mapOf("ы" to "и", "Ы" to "И", "я" to "а", "Я" to "А", "ю" to "у", "Ю" to "У")
 val consonant = setOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
 val writer = File(outputName).bufferedWriter()
 for (line in File(inputName).readLines()) {
 writer.write(line[0].toString())
 val strOfLetters = buildString {
 for (i in 1..line.length - 1) {
-if (vowels.contains(line[i].toString()) && consonant.contains(line[i - 1].toString())) {
-val indexx = vowels.indexOf(line[i].toString())
-append(correctVowels[indexx])
+if (consonant.contains(line[i - 1].toString()) &&  ) {
+for ((k, v) in allVowels) {
+if (line[i].toString() == k) {
+//val indexx = vowels.indexOf(line[i].toString())
+append(v)
+}
+}
 } else {
 append(line[i].toString())
 }
@@ -123,7 +126,7 @@ writer.write(strOfLetters)
 writer.newLine()
 }
 writer.close()
- **/
+}**/
 
 
 /**
@@ -155,7 +158,6 @@ return count
 
 fun centerFile(inputName: String, outputName: String): Nothing {
     TODO()
-
 }
 /**
 //найти самую длинную строку *не берем в учет пробелы
@@ -248,7 +250,9 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  * Ключи в ассоциативном массиве должны быть в нижнем регистре.
  *
  */
-fun top20Words(inputName: String): Map<String, Int> = TODO()
+fun top20Words(inputName: String): Map<String, Int> {
+    TODO()
+}
 
 /**
  * Средняя (14 баллов)
@@ -326,22 +330,16 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
         }
     }
 
+    val maxLen = mapForLongest.maxOf { it.second }
+    val result = mutableListOf<String>()
 
-    for (i in mapForLongest.indices){
-        if(mapForLongest[i].first.length != sizes){
-            mapForLongest.removeAt(i)
+    for ((line, len) in mapForLongest) {
+        if (len == maxLen) {
+            result.add(line)
         }
     }
 
-
-    if (!mapForLongest.isEmpty()) {
-        val res = buildString {
-            for ((nameq) in mapForLongest) {
-                append(", $nameq")
-            }
-        }
-        writer.write(res.substring(2, res.length))
-    }
+    writer.write(result.joinToString())
     writer.close()
 }
 
@@ -393,6 +391,25 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
     TODO()
 }
+// val text = File(inputName).bufferedReader().readText()
+// val temp = ""
+// fun process(char: Char) {}
+// for (char in text) {
+//   process(char)
+//}
+
+// if (opHtmlMap[buffer] != null && opHtmlMap[buffer + char.toString()] == null)
+// if (buffer in opHtmlMap.keys && buffer + char.toString() !in opHtmlMap.keys)
+// (){}[]
+// [{  ] }
+// [ {   ( ) } ]
+//    if (char == '~' || char == '*') {
+//        buffer = char.toString()
+//    } else {
+//        sb.append(char)
+//        buffer = ""
+//    }
+
 /**val writer = File(outputName).bufferedWriter()
 val text = File(inputName).readLines()
 //вводим все необходимые штуки

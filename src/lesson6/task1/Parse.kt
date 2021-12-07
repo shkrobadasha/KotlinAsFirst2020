@@ -312,12 +312,3 @@ fun fromRoman(roman: String): Int = TODO()
  *
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
-
-/**fun myFun(input: String): String {
-    val reg = "\\d+([ ]\\d+)*".toRegex()
-    var result = mutableListOf<String>()//для самой длинной из множества чисел -1
-    if (!input.matches(reg)) throw IllegalArgumentException()
-    val numbers = input.split(Regex("""[ ]+"""))//создали список чисел(каждое число - строка)
-    val numbersMirrow = numbers.reversed()//перевернутый список чисед
-    val stringOfLast = mutableListOf<String>() //просто для записи текущей длиннейшей в перевернутом списке
-}**/
