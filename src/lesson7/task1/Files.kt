@@ -331,16 +331,14 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     }
     val maxLen = mapForLongest.maxOf { it.second }
     val result = mutableListOf<String>()
+    println(maxLen)
 
     for ((line, len) in mapForLongest) {
         if (len == maxLen) {
             result.add(line)
         }
     }
-
-    if (result.isNotEmpty()) {
-        writer.write(result.joinToString())
-    }
+    writer.write(result.joinToString())
     writer.close()
 }
 
@@ -392,6 +390,7 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
     TODO()
 }
+
 // val text = File(inputName).bufferedReader().readText()
 // val temp = ""
 // fun process(char: Char) {}
