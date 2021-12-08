@@ -51,20 +51,20 @@ fun timeSecondsToStr(seconds: Int): String {
 /**
  * Пример: консольный ввод
  */
-fun main() {
-    println("Введите время в формате ЧЧ:ММ:СС")
-    val line = readLine()
-    if (line != null) {
-        val seconds = timeStrToSeconds(line)
-        if (seconds == -1) {
-            println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        } else {
-            println("Прошло секунд с начала суток: $seconds")
-        }
-    } else {
-        println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
-    }
-}
+//fun main() {
+//    println("Введите время в формате ЧЧ:ММ:СС")
+//    val line = readLine()
+//    if (line != null) {
+//        val seconds = timeStrToSeconds(line)
+//        if (seconds == -1) {
+//            println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
+//        } else {
+//            println("Прошло секунд с начала суток: $seconds")
+//        }
+//    } else {
+//        println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
+//    }
+//}
 
 
 /**
@@ -313,3 +313,15 @@ fun fromRoman(roman: String): Int = TODO()
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
 
+fun convertTimeFromStrToIntItMinutes(time: String) = time.split(":").let { it.first().toInt() * 60 + it.last().toInt() }
+
+/**fun myFun(station:String, time: String, schedule: List<String>): String {
+val timeAsMinutes = convertTimeFromStrToIntItMinutes(time)
+return schedule
+.map { it.split("; ").map { it.trim() } }
+.map { Triple(it[0], it[1], convertTimeFromStrToIntItMinutes(it[2])) }
+.filter { it.second == station && it.third > timeAsMinutes }
+.minByOrNull { it.third }
+?.first ?: throw IllegalArgumentException()
+
+}**/

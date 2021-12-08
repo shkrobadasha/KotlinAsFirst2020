@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import kotlin.math.max
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -146,20 +147,29 @@ writer.close()
  * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
  *
  */
-
-/**fun lenOfString(string: Char): Int {
-val str = string.toString().split("")
-var count = 0
-for (el in str) {
-if (el != "") count++
+fun centerFile(inputName: String, outputName: String) {
+    val writer = File(outputName).bufferedWriter()
+    var longesLine = 0
+    File(inputName).readLines().forEach {
+        if (it.isNotEmpty() && it.trim().length > longesLine) {
+            longesLine = (it.trim().length)
+        }
+    }
+    File(inputName).readLines().forEach {
+        val result = buildString {
+            val raz = (longesLine - (it.trim().length))/2
+            if (raz != 0) {
+                for (j in 0 until raz) {
+                    append(' ')
+                }
+            }
+        }
+        writer.write(result + it.trim())
+        writer.newLine()
+    }
+    writer.close()
 }
-return count
-}**/
-
-fun centerFile(inputName: String, outputName: String): Nothing {
-    TODO()
-}
-/**
+    /**
 //найти самую длинную строку *не берем в учет пробелы
 // потом пишем если эта строка без пробело в больше макс то макс равно
 //потом идем по списку(цикл уже с изменяемым) и если длина строки не такая как макс то добавляем в начало пробелы

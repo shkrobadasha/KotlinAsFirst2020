@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson3.task1.isPrime
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 // Урок 4: списки
@@ -121,14 +122,7 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double {
-    val result = mutableListOf<Double>()
-    for (element in v) {
-        result.add(element * element)
-    }
-    val a = sqrt(result.sum())
-    return a
-}
+fun abs(v: List<Double>): Double = sqrt(v.sumOf { it * it })
 
 
 /**
@@ -136,14 +130,13 @@ fun abs(v: List<Double>): Double {
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double {
-
+fun mean(list: List<Double>): Double =
     if (list.isEmpty()) {
-        return 0.0
+        0.0
     } else {
-        return list.sum() / list.size.toDouble()
+        list.sum() / list.size.toDouble()
     }
-}
+
 
 /**
  * Средняя (3 балла)
@@ -170,13 +163,15 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int {
-    var result = 0
-    for (i in a.indices) {
-        result += a[i] * b[i]
-    }
-    return result
-}
+fun times(a: List<Int>, b: List<Int>): Int = a.mapIndexed { index, el -> el * b[index] }.sum()
+
+//{
+//    var result = 0
+//    for (i in a.indices) {
+//        result += a[i] * b[i]
+//    }
+//    return result
+//}
 
 /**
  * Средняя (3 балла)
@@ -188,7 +183,8 @@ fun times(a: List<Int>, b: List<Int>): Int {
  */
 
 
-fun polynom(p: List<Int>, x: Int): Int {
+fun polynom(p: List<Int>, x: Int): Int
+{
     var result = 0
     for (i in p.indices) {
         var step = 1
@@ -257,10 +253,11 @@ fun factorize(n: Int): MutableList<Int> {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String {
-    val result = factorize(n)
-    return result.joinToString(separator = "*")
-}
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
+//{
+//    val result = factorize(n)
+//    return result.joinToString(separator = "*")
+//}
 
 
 /**
@@ -298,6 +295,8 @@ fun convert(n: Int, base: Int): List<Int> {
  */
 fun convertToString(n: Int, base: Int): String {
     val list = convert(n, base)
+    //'b' - 'a' = 1
+    //'a' + 1 = 'b' => 'a' - 10 + 15
     val alphabet = "abcdefghijklmnopqrstuvwxyz"
     val result = buildString {
         for (elem in list) {
