@@ -147,15 +147,17 @@ writer.close()
  * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
  *
  */
-fun centerFile(inputName: String, outputName: String) {
+fun centerFile(inputName: String, outputName: String){
     val writer = File(outputName).bufferedWriter()
     var longesLine = 0
+    val text = mutableListOf<String>()
     File(inputName).readLines().forEach {
         if (it.isNotEmpty() && it.trim().length > longesLine) {
             longesLine = (it.trim().length)
         }
+        text.add(it + "\n")
     }
-    File(inputName).readLines().forEach {
+    text.forEach {
         val result = buildString {
             val raz = (longesLine - (it.trim().length))/2
             if (raz != 0) {
@@ -169,44 +171,6 @@ fun centerFile(inputName: String, outputName: String) {
     }
     writer.close()
 }
-    /**
-//найти самую длинную строку *не берем в учет пробелы
-// потом пишем если эта строка без пробело в больше макс то макс равно
-//потом идем по списку(цикл уже с изменяемым) и если длина строки не такая как макс то добавляем в начало пробелы
-//пока она не станет такой же
-var theLongestLine = 0
-//нашли самую длинную строку
-for (line in File(inputName).readLines().toString()) {
-val l = lenOfString(line)
-if (l > theLongestLine) {
-theLongestLine = l
-}
-}
-val writer = File(outputName).bufferedWriter()
-for (str in File(outputName).readLines().toString()) {
-var raz = (theLongestLine - lenOfString(str))/2
-while (raz > 0) {
-writer.write(" ")
-raz--
-}
-writer.write(str)
-}
-
-}
-
-}
-var temp = (max - line.trim().length) / 2
-while (temp > 0) {
-outputStream.write(" ")
-temp--
-}
-outputStream.write(line.trim())
-outputStream.newLine()
-}
-outputStream.close()
-}
-или через шаблон regex(если та штука содержится в строке то смотрим ее длину и все такое
-)*/
 
 
 /**
