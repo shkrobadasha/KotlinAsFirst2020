@@ -107,20 +107,22 @@ fun dateDigitToStr(digital: String): String = TODO()
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
 fun flattenPhoneNumber(phone: String): String {
-    var res = ""
-    val reg = Regex("""(\+\d+)?[\s\-]*(\(\d+[\d+\-\s]*\))?[\d+\s\-]*""")
-    if (!reg.matches(phone) || phone.isEmpty()) {
-        return res
-    }
-    val regForStr = Regex("""[\d\+]""")
-    if (regForStr.matches(phone[0].toString())) res += phone[0]
-    for (i in 1 until phone.length) {
-        if (regForStr.matches(phone[i].toString()) && phone[i].toString() != "+") {
-            res += phone[i]
-        }
-    }
-    return res
+    TODO()
 }
+/**var res = ""
+val reg = Regex("""(\+\d+)?[\s\-]*(\(\d+[\d+\-\s]*\))?[\d+\s\-]*""")
+if (!reg.matches(phone) || phone.isEmpty()) {
+return res
+}
+val regForStr = Regex("""[\d\+]""")
+if (regForStr.matches(phone[0].toString())) res += phone[0]
+for (i in 1 until phone.length) {
+if (regForStr.matches(phone[i].toString()) && phone[i].toString() != "+") {
+res += phone[i]
+}
+}
+return res
+}**/
 
 /**
  * Средняя (5 баллов)
