@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import java.io.PrintStream
 import kotlin.math.max
 
 // Урок 7: работа с файлами
@@ -147,7 +148,7 @@ writer.close()
  * 4) Число строк в выходном файле должно быть равно числу строк во входном (в т. ч. пустых)
  *
  */
-fun centerFile(inputName: String, outputName: String){
+fun centerFile(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var longesLine = 0
     val text = mutableListOf<String>()
@@ -157,9 +158,10 @@ fun centerFile(inputName: String, outputName: String){
         }
         text.add(it + "\n")
     }
+    println(text)
     text.forEach {
         val result = buildString {
-            val raz = (longesLine - (it.trim().length))/2
+            val raz = (longesLine - (it.trim().length)) / 2
             if (raz != 0) {
                 for (j in 0 until raz) {
                     append(' ')
@@ -201,8 +203,48 @@ fun centerFile(inputName: String, outputName: String){
  * 8) Если входной файл удовлетворяет требованиям 1-7, то он должен быть в точности идентичен выходному файлу
  */
 fun alignFileByWidth(inputName: String, outputName: String) {
-    TODO()
+    var maxLen = 0
+    val writer = File(outputName).bufferedWriter()
+    val text = mutableListOf<String>()
+    val reg = Regex("""[ ]+""")
+    //нашли длинную
+    File(inputName).readLines().forEach {
+        if (it.isNotEmpty() && it.trim().replace(reg, " ").length > maxLen) {
+            maxLen = it.trim().replace(reg, " ").length
+        }
+        text.add(it.trim().replace(reg, " "))
+    }
+    text.forEach {
+        val masOfWords = it.split(" ").toMutableList()
+        if (masOfWords.size < 2) {
+            writer.write(it)
+        } else {
+            val spaces = maxLen - it.length + (masOfWords.size - 1)
+            var extraBalance = spaces % (masOfWords.size - 1)
+            for (i in 0 until masOfWords.size - 1) {
+                val res = buildString {
+                    var one = 0
+                    if (extraBalance > 0) {
+                        one++
+                        extraBalance--
+                    }
+                    append(" ".repeat(spaces/ (masOfWords.size - 1) + one))
+                }
+                masOfWords[i] += res
+            }
+            val result = buildString {
+                for (j in masOfWords) {
+                    append(j)
+                }
+            }
+            writer.write(result)
+        }
+        writer.newLine()
+    }
+    writer.close()
 }
+
+
 
 /**
  * Средняя (14 баллов)
@@ -363,11 +405,10 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
     TODO()
 }
-    // val openTegs = mapOf("*" to "<i>", "**" to "<b>", "~~" to "<s>")
-   //val endTegs = mapOf("*" to "</i>", "**" to "</b>", "~~" to "</s>")
-    //val writer = File(outputName).bufferedWriter()
-   // writer.write("<p><html><body>")
-
+// val openTegs = mapOf("*" to "<i>", "**" to "<b>", "~~" to "<s>")
+//val endTegs = mapOf("*" to "</i>", "**" to "</b>", "~~" to "</s>")
+//val writer = File(outputName).bufferedWriter()
+// writer.write("<p><html><body>")
 
 
 // val text = File(inputName).bufferedReader().readText()
