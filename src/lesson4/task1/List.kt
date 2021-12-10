@@ -254,10 +254,7 @@ fun factorize(n: Int): MutableList<Int> {
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
 fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
-//{
-//    val result = factorize(n)
-//    return result.joinToString(separator = "*")
-//}
+
 
 
 /**
@@ -297,11 +294,10 @@ fun convertToString(n: Int, base: Int): String {
     val list = convert(n, base)
     //'b' - 'a' = 1
     //'a' + 1 = 'b' => 'a' - 10 + 15
-    val alphabet = "abcdefghijklmnopqrstuvwxyz"
     val result = buildString {
         for (elem in list) {
             if (elem > 9) {
-                append(alphabet[elem - 10])
+                append('a' + elem - 10)
             } else append(elem)
         }
     }
@@ -316,21 +312,7 @@ fun convertToString(n: Int, base: Int): String {
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int {
-    val numbers = digits.reversed().toMutableList()
-    var result = 0
-    for (i in 0 until numbers.size) {
-        var k = i
-        var a = 1
-        while (k > 0) {
-            a *= base
-            k -= 1
-        }
-        numbers[i] *= a
-        result += numbers[i]
-    }
-    return result
-}
+fun decimal(digits: List<Int>, base: Int): Int = TODO()
 
 /**
  * Сложная (4 балла)

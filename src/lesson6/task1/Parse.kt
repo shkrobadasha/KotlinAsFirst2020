@@ -5,6 +5,7 @@ package lesson6.task1
 import jdk.jfr.Description
 import kotlinx.html.I
 import java.lang.Math.abs
+import java.util.*
 
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
@@ -109,20 +110,6 @@ fun dateDigitToStr(digital: String): String = TODO()
 fun flattenPhoneNumber(phone: String): String {
     TODO()
 }
-/**var res = ""
-val reg = Regex("""(\+\d+)?[\s\-]*(\(\d+[\d+\-\s]*\))?[\d+\s\-]*""")
-if (!reg.matches(phone) || phone.isEmpty()) {
-return res
-}
-val regForStr = Regex("""[\d\+]""")
-if (regForStr.matches(phone[0].toString())) res += phone[0]
-for (i in 1 until phone.length) {
-if (regForStr.matches(phone[i].toString()) && phone[i].toString() != "+") {
-res += phone[i]
-}
-}
-return res
-}**/
 
 /**
  * Средняя (5 баллов)
@@ -208,25 +195,8 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в') */
 
 fun firstDuplicateIndex(str: String): List<String> = TODO()
-/**{
-val line = str.split(" ")
-var indOfTwin = -1
-var sum = mutableListOf<String>()
-var counter = -1
-for (i in 0 until line.size-1) {
-if (line[i] != line[i + 1]) {
-sum.add(line[i].split("").toString())
-sum.add(" ")
-counter++
-}
-println(sum)
-if (counter > 0){
-indOfTwin == -1
 
-}
-}
-return -1
-}**/
+
 
 /**
  * Сложная (6 баллов)
@@ -314,16 +284,3 @@ fun fromRoman(roman: String): Int = TODO()
  *
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
-
-fun convertTimeFromStrToIntItMinutes(time: String) = time.split(":").let { it.first().toInt() * 60 + it.last().toInt() }
-
-/**fun myFun(station:String, time: String, schedule: List<String>): String {
-val timeAsMinutes = convertTimeFromStrToIntItMinutes(time)
-return schedule
-.map { it.split("; ").map { it.trim() } }
-.map { Triple(it[0], it[1], convertTimeFromStrToIntItMinutes(it[2])) }
-.filter { it.second == station && it.third > timeAsMinutes }
-.minByOrNull { it.third }
-?.first ?: throw IllegalArgumentException()
-
-}**/

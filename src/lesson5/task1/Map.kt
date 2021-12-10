@@ -171,7 +171,6 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
     for ((name, phoneNumber) in mapB) {
         if (result[name] != null && phoneNumber != result[name]) {
             result[name] += ", $phoneNumber"
-
         } else {
             result[name] = phoneNumber//если значения с таким ключем еще нет
         }
@@ -190,25 +189,7 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> =  TODO()
-/**val result = mutableMapOf<String, Double>()
-var str = "q"
-for (el in stockPrices.indices) {
-str = stockPrices.first().toString()
-var sum = 0
-var count = 0.0
-for ((name, coast) in result) {
-if (name == str) {
-//sum += stockPrices.second()
-count++
-}
-}
-}
-return result//не надр
-}*/
-//зададим i значение будем идти и смотреть,что если
-// нет такого ключа как лист1i то добавляем его в карту и идем по массиву у кого первое такое значение как ключ
-// мы добавим в сумму,которая копится и  счетчик +1 и потом делаем i +1
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
 
 
 /**
@@ -263,34 +244,6 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
 fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
-/**val res = mutableListOf<String>()
-val result = mutableMapOf<String, Int>()
-for (q in 0 until list.size) {
-res.add(list[0])
-}
-
-for (el in list) {
-if (el !in res) {
-res.add(el)
-}
-}
-list.sorted()
-for (i in 1 until list.size) {
-
-while (list[i] == list[i+1])
-var count = 0
-if (res.contains(list[i])) {
-count++
-}
-
-
-
-if (count > 1) {
-result.put(list[i], count)
-}
-}
-return result
-}**/
 
 /**
  * Средняя (3 балла)
@@ -364,9 +317,10 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     if (list.isEmpty()) {
         return Pair(-1, -1)
     }
-
-    for (i in 0..list.size - 1) {
-        result[list[i]] = i
+    var counter = 0
+    list.forEach{
+        result[it] = counter
+        counter++
     }
     for (i in list.indices) {
         if ((number - list[i]) in result && (i != result.getValue(number - list[i]))) {
@@ -400,39 +354,3 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
  */
 
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
-/** в процессе  выполнения {
-val weight = mutableListOf<Int>()
-val value = mutableListOf<Int>()
-val names = mutableListOf<String>()
-var number = 0
-/*val number = treasures.size*/
-val result = mutableSetOf<String>()
-for ((name, pair) in treasures) {
-weight.add(pair.first)
-value.add(pair.second)
-names.add(name)
-number++
-}
-
-val m = Array(number + 1) { Array(capacity + 1) { 0 } }
-
-for (i in 1..number) {
-for (j in 0..capacity){
-if (weight[i] > j) {
-m[i][j] = m[i - 1][j]
-} else {
-m[i][j] = max(m[i - 1][j], m[i - 1][j - weight[i - 1]] + value[i - 1])
-}
-}
-}
-var s = capacity
-while (number > 0) {
-if (m[number][s] != m[number - 1][s]) {
-result.add(names[number - 1])
-s -= weight[number - 1]
-}
-number --
-}
-return result
-}
- **/

@@ -104,33 +104,6 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
 fun sibilants(inputName: String, outputName: String) {
     TODO()
 }
-/**val vowels = setOf("ы", "Ы""ы", "я", "Я", "ю", "Ю")
-val allVowels = mapOf("ы" to "и", "Ы" to "И", "я" to "а", "Я" to "А", "ю" to "у", "Ю" to "У")
-val consonant = setOf("ж", "Ж", "ш", "Ш", "ч", "Ч", "щ", "Щ")
-val writer = File(outputName).bufferedWriter()
-for (line in File(inputName).readLines()) {
-writer.write(line[0].toString())
-val strOfLetters = buildString {
-for (i in 1..line.length - 1) {
-if (consonant.contains(line[i - 1].toString()) &&  ) {
-for ((k, v) in allVowels) {
-if (line[i].toString() == k) {
-//val indexx = vowels.indexOf(line[i].toString())
-append(v)
-}
-}
-} else {
-append(line[i].toString())
-}
-}
-}
-writer.write(strOfLetters)
-writer.newLine()
-}
-writer.close()
-}**/
-
-
 /**
  * Средняя (15 баллов)
  *
@@ -335,26 +308,7 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  */
 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
-    val writer = File(outputName).bufferedWriter()
-    var sizes = -1
-    val mapForLongest = mutableListOf<Pair<String, Int>>()
-    for (line in File(inputName).readLines()) {
-        val word = line.toLowerCase().toCharArray().toSet()
-        if (word.size == line.length && line.length >= sizes) {
-            sizes = line.length//найдем наибольшую длину
-            mapForLongest.add(line to sizes)
-        }
-    }
-    val maxLen = mapForLongest.maxOf { it.second }
-    val result = mutableListOf<String>()
-
-    for ((line, len) in mapForLongest) {
-        if (len == maxLen) {
-            result.add(line)
-        }
-    }
-    writer.write(result.joinToString())
-    writer.close()
+    TODO()
 }
 
 /**
