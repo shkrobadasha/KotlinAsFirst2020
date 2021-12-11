@@ -2,6 +2,7 @@
 
 package lesson4.task1
 
+import kotlinx.html.I
 import lesson1.task1.discriminant
 import lesson3.task1.isPrime
 import kotlin.math.pow
@@ -183,8 +184,7 @@ fun times(a: List<Int>, b: List<Int>): Int = a.mapIndexed { index, el -> el * b[
  */
 
 
-fun polynom(p: List<Int>, x: Int): Int
-{
+fun polynom(p: List<Int>, x: Int): Int {
     var result = 0
     for (i in p.indices) {
         var step = 1
@@ -239,7 +239,7 @@ fun factorize(n: Int): MutableList<Int> {
             i++
         }
     }
-    if (isPrime(m)){
+    if (isPrime(m)) {
         result.add(m)
     }
     return result
@@ -254,7 +254,6 @@ fun factorize(n: Int): MutableList<Int> {
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
 fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
-
 
 
 /**
@@ -359,4 +358,120 @@ fun roman(n: Int): String {
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+
+fun russian(n: Int): String{
+    val ed = listOf(
+        "один",
+        "два",
+        "три",
+        "четыре",
+        "пять",
+        "шесть",
+        "семь",
+        "восемь",
+        "девять"
+    )
+    val edForThousand = listOf(
+        "одна",
+        "две",
+        "три",
+        "четыре",
+        "пять",
+        "шесть",
+        "семь",
+        "восемь",
+        "девять"
+    )
+    val firsDoz = listOf(
+        "десять",
+        "одиннадцать",
+        "двенадцать",
+        "тринадцать",
+        "четырнадцать",
+        "пятнадцать",
+        "шестнадцать",
+        "семнадцать",
+        "восемнадцать",
+        "девятнадцать"
+    )
+    val dozens = listOf(
+        "двадцать",
+        "тридцать",
+        "сорок",
+        "пятьдесят",
+        "шестьдесят",
+        "семьдесят",
+        "восемьдесят",
+        "девяносто"
+    )
+    val hundred = listOf(
+        "сто",
+        "двести",
+        "триста",
+        "четыреста",
+        "пятьсот",
+        "шестьсот",
+        "семьсот",
+        "восемьсот",
+        "девятьсот"
+    )
+
+    fun name(a: Int): String {
+        val res1 = buildString {//эта ищет названия сотен и десятоков.пихнем в функцию
+            // для единиц отдельно для билстриньг сделаю
+            if (a / 100 != 0) {
+                append(hundred[a / 100 - 1] + " ")
+            }
+            if (((a % 100 - a % 10) / 10) == 1) {
+                append(firsDoz[a % 10] + " ")
+            } else {
+                if ((a % 100 - a % 10) / 10 != 0) {
+                    append(dozens[(a % 100 - a % 10) / 10 - 2] + " ")
+                }
+            }
+        }
+        return res1
+    }
+   //var res = ""
+    val tous = setOf(2, 3, 4)
+    val touss = setOf(0, 5, 6, 7, 8, 9)
+    val thousand = n / 1000
+    val ost = n % 1000
+
+    var resT1 = ""
+    if (thousand != 0) {
+        resT1 = name(thousand)
+        if (((thousand % 100 - thousand % 10) / 10) != 1
+            && thousand % 10 != 0
+        ) {
+            resT1 += edForThousand[thousand % 10 - 1] + " "
+        }
+        if (((thousand % 100 - thousand % 10) / 10) == 1 || touss.contains(thousand % 10)) {
+            resT1 += "тысяч" + " "
+        } else {
+            if (tous.contains(thousand % 10)) {
+                resT1 += "тысячи" + " "
+            } else {
+                resT1 += "тысяча" + " "
+            }
+        }
+    }
+    //println(resT1)
+
+    //var resT2 = ""
+    if (ost != 0) {
+        resT1 += name(ost)
+        if (((ost % 100 - ost % 10) / 10) != 1
+            && ost % 10 != 0
+        ) {
+            resT1 += ed[ost % 10 - 1] + " "
+        }
+    }
+    //val resul = resT1.slice(0, resT1.length-1)
+
+
+    return resT1.substring(0,resT1.length-1)
+}
+
+
+
