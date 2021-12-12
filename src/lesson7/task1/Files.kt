@@ -382,6 +382,7 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
         }
     }
     File(outputName).bufferedWriter().use {
+        if (text == "") result.clear()
         it.write("<html><body><p>")
         it.write(result.toString())
         it.write("</p></body></html>")
