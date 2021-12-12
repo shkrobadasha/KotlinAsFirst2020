@@ -295,38 +295,46 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
 
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
     val text = File(inputName).readText().trim()
-    var nekoPara1 = 1
-    var nekoPara2 = 1
+    var check1 = 1
+    var check2 = 1
     val result = StringBuilder()
     val stack = Stack<String>()
-    val blancRegex = Regex("""\s+""")
+    val blankRegex = Regex("""\s+""")
+    val map = mapOf(
+        "**" to "b",
+        "*" to "i",
+        "~~" to "s"
+    )
+    var i = 0
+    fun appender(line: String, prefix: String) {
+        if (stack.isEmpty() || stack.last() != prefix) {
+            stack.add(prefix)
+            result.append("<${map[prefix]}>")
+        } else {
+            stack.pop()
+            result.append("</${map[prefix]}>")
+        }
+        i += prefix.length
+    }
     for (line in text.lines()) {
-        if (line.isEmpty() || line.matches(blancRegex)) {
-            nekoPara1 = 0
-            if (nekoPara2 - nekoPara1 > 0) {
+        if (line.isEmpty() || line.matches(blankRegex)) {
+            check1 = 0
+            if (check2 - check1 > 0) {
                 result.append("</p>")
-                nekoPara2 = 0
+                check2 = 0
             }
         } else {
-            nekoPara1 = 1
-            if (nekoPara2 - nekoPara1 < 0){
+            check1 = 1
+            if (check2 - check1 < 0) {
                 result.append("<p>")
-                nekoPara2 = 1
+                check2 = 1
             }
-            var i = 0
+            i = 0
             while (i < line.length) {
                 when (line[i]) {
                     '~' -> {
-                        if (line.startsWith("~~", i)) {
-                            if (stack.isEmpty() || stack.last() != "~~") {
-                                stack.add("~~")
-                                result.append("<s>")
-                            } else {
-                                stack.pop()
-                                result.append("</s>")
-                            }
-                            i += 2
-                        } else result.append("~")
+                        if (line.startsWith("~~", i)) appender(line, "~~")
+                        else result.append("~")
                     }
                     '*' -> {
                         if (line.startsWith("***", i)) {
@@ -353,25 +361,8 @@ fun markdownToHtmlSimple(inputName: String, outputName: String) {
                                 }
                             }
                             i += 3
-                        } else if (line.startsWith("**", i)) {
-                            if (stack.isEmpty() || stack.last() != "**") {
-                                stack.add("**")
-                                result.append("<b>")
-                            } else {
-                                stack.pop()
-                                result.append("</b>")
-                            }
-                            i += 2
-                        } else if (line.startsWith("*", i)) {
-                            if (stack.isEmpty() || stack.last() != "*") {
-                                stack.add("*")
-                                result.append("<i>")
-                            } else {
-                                stack.pop()
-                                result.append("</i>")
-                            }
-                            i += 1
-                        }
+                        } else if (line.startsWith("**", i)) appender(line, "**")
+                        else appender(line, "*")
                     }
                     else -> {
                         result.append(line[i])
