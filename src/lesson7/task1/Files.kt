@@ -104,6 +104,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
 fun sibilants(inputName: String, outputName: String) {
     TODO()
 }
+
 /**
  * Средняя (15 баллов)
  *
@@ -201,7 +202,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
                         one++
                         extraBalance--
                     }
-                    append(" ".repeat(spaces/ (masOfWords.size - 1) + one))
+                    append(" ".repeat(spaces / (masOfWords.size - 1) + one))
                 }
                 masOfWords[i] += res
             }
@@ -216,7 +217,6 @@ fun alignFileByWidth(inputName: String, outputName: String) {
     }
     writer.close()
 }
-
 
 
 /**
@@ -359,35 +359,6 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
     TODO()
 }
-// val openTegs = mapOf("*" to "<i>", "**" to "<b>", "~~" to "<s>")
-//val endTegs = mapOf("*" to "</i>", "**" to "</b>", "~~" to "</s>")
-//val writer = File(outputName).bufferedWriter()
-// writer.write("<p><html><body>")
-
-
-// val text = File(inputName).bufferedReader().readText()
-// val temp = ""
-// fun process(char: Char) {}
-// for (char in text) {
-//   process(char)
-//}
-
-// if (opHtmlMap[buffer] != null && opHtmlMap[buffer + char.toString()] == null)
-// if (buffer in opHtmlMap.keys && buffer + char.toString() !in opHtmlMap.keys)
-// (){}[]
-// [{  ] }
-// [ {   ( ) } ]
-//    if (char == '~' || char == '*') {
-//        buffer = char.toString()
-//    } else {
-//        sb.append(char)
-//        buffer = ""
-//    }
-
-/**val writer = File(outputName).bufferedWriter()
-val text = File(inputName).readLines()
-//вводим все необходимые штуки
-writer.write("<html><body><p>")**/
 
 
 /**

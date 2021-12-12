@@ -359,7 +359,7 @@ fun roman(n: Int): String {
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
 
-fun russian(n: Int): String{
+fun russian(n: Int): String {
     val ed = listOf(
         "один",
         "два",
@@ -417,8 +417,7 @@ fun russian(n: Int): String{
     )
 
     fun name(a: Int): String {
-        val res1 = buildString {//эта ищет названия сотен и десятоков.пихнем в функцию
-            // для единиц отдельно для билстриньг сделаю
+        val res1 = buildString {
             if (a / 100 != 0) {
                 append(hundred[a / 100 - 1] + " ")
             }
@@ -432,12 +431,11 @@ fun russian(n: Int): String{
         }
         return res1
     }
-   //var res = ""
+
     val tous = setOf(2, 3, 4)
     val touss = setOf(0, 5, 6, 7, 8, 9)
     val thousand = n / 1000
     val ost = n % 1000
-
     var resT1 = ""
     if (thousand != 0) {
         resT1 = name(thousand)
@@ -456,9 +454,6 @@ fun russian(n: Int): String{
             }
         }
     }
-    //println(resT1)
-
-    //var resT2 = ""
     if (ost != 0) {
         resT1 += name(ost)
         if (((ost % 100 - ost % 10) / 10) != 1
@@ -467,10 +462,7 @@ fun russian(n: Int): String{
             resT1 += ed[ost % 10 - 1] + " "
         }
     }
-    //val resul = resT1.slice(0, resT1.length-1)
-
-
-    return resT1.substring(0,resT1.length-1)
+    return resT1.substring(0, resT1.length - 1)
 }
 
 

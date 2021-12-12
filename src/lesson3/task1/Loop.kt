@@ -95,17 +95,16 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    var m = n
-    var fibOne = 1
-    var fibTwo = 1
-    var fibResult = 1
-    for (i in 3..n) {
-        fibResult = fibOne + fibTwo
-        fibTwo = fibOne
-        fibOne = fibResult
+    if(n == 1 || n == 2) return 1
+    val listOfNumbers = mutableListOf(1, 1)
+    for (i in 0..n - 3) {
+        val fibResult = listOfNumbers[i] + listOfNumbers[i + 1]
+        listOfNumbers.add(fibResult)
+        //println()
     }
-    return fibResult
+    return listOfNumbers.last()
 }
+
 
 /**
  * Простая (2 балла)
@@ -225,9 +224,8 @@ fun revert(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun isPalindrome(n: Int): Boolean {
-    val poly = n
     val number = revert(n)
-    return poly == number
+    return n == number
 }
 
 /**
