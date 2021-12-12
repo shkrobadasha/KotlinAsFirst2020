@@ -4,6 +4,8 @@ package lesson7.task1
 
 import lesson3.task1.digitNumber
 import java.io.File
+import java.lang.StringBuilder
+import java.util.Stack
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -290,8 +292,100 @@ Suspendisse <s>et elit in enim tempus iaculis</s>.
  *
  * (Отступы и переносы строк в примере добавлены для наглядности, при решении задачи их реализовывать не обязательно)
  */
+
 fun markdownToHtmlSimple(inputName: String, outputName: String) {
-    TODO()
+    val text = File(inputName).readText().trim()
+    var nekoPara1 = 1
+    var nekoPara2 = 1
+    val result = StringBuilder()
+    val stack = Stack<String>()
+    val blancRegex = Regex("""\s+""")
+    for (line in text.lines()) {
+        if (line.isEmpty() || line.matches(blancRegex)) {
+            nekoPara1 = 0
+            if (nekoPara2 - nekoPara1 > 0) {
+                result.append("</p>")
+                nekoPara2 = 0
+            }
+        } else {
+            nekoPara1 = 1
+            if (nekoPara2 - nekoPara1 < 0){
+                result.append("<p>")
+                nekoPara2 = 1
+            }
+            var i = 0
+            while (i < line.length) {
+                when (line[i]) {
+                    '~' -> {
+                        if (line.startsWith("~~", i)) {
+                            if (stack.isEmpty() || stack.last() != "~~") {
+                                stack.add("~~")
+                                result.append("<s>")
+                            } else {
+                                stack.pop()
+                                result.append("</s>")
+                            }
+                            i += 2
+                        } else result.append("~")
+                    }
+                    '*' -> {
+                        if (line.startsWith("***", i)) {
+                            if (stack.isEmpty() || stack.size == 1 && stack.last() == "~~") {
+                                result.append("<b><i>")
+                                stack.add("**")
+                                stack.add("*")
+                            } else {
+                                if (stack.contains("**") && stack.contains("*")) {
+                                    if (stack.indexOf("**") < stack.indexOf("*")) result.append("</i></b>")
+                                    else result.append("</b></i>")
+                                    stack.pop()
+                                    stack.pop()
+                                } else {
+                                    if (stack.last() == "*") {
+                                        result.append("</i><b>")
+                                        stack.pop()
+                                        stack.add("**")
+                                    } else {
+                                        result.append("</b><i>")
+                                        stack.pop()
+                                        stack.add("*")
+                                    }
+                                }
+                            }
+                            i += 3
+                        } else if (line.startsWith("**", i)) {
+                            if (stack.isEmpty() || stack.last() != "**") {
+                                stack.add("**")
+                                result.append("<b>")
+                            } else {
+                                stack.pop()
+                                result.append("</b>")
+                            }
+                            i += 2
+                        } else if (line.startsWith("*", i)) {
+                            if (stack.isEmpty() || stack.last() != "*") {
+                                stack.add("*")
+                                result.append("<i>")
+                            } else {
+                                stack.pop()
+                                result.append("</i>")
+                            }
+                            i += 1
+                        }
+                    }
+                    else -> {
+                        result.append(line[i])
+                        i += 1
+                    }
+                }
+            }
+        }
+    }
+    File(outputName).bufferedWriter().use {
+        it.write("<html><body><p>")
+        it.write(result.toString())
+        it.write("</p></body></html>")
+    }
 }
 
 /**
