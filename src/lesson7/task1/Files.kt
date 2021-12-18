@@ -546,15 +546,15 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
 
 fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     val writer = File(outputName).bufferedWriter()
+    var prefix = ""
     val quotient = lhv / rhv
-    val lhv0 = lhv.toString()
     val q0 = quotient.toString()
+    val lhv0 = lhv.toString()
     var cur = q0[0].toString().toInt() * rhv
     var len = lhv0.length + 3
     var curlhv = if (cur == 0) lhv0
     else lhv0.substring(0, digitNumber(cur))
     var next = digitNumber(cur) - 1
-    var prefix = ""
     var currem = curlhv.toInt() - cur
     if (currem < 0) {
         writer.write("$lhv | $rhv")
@@ -567,22 +567,30 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         len += 1
     }
     writer.newLine()
-    val sub = if (cur == 0) "   "
+    var sub = if (cur == 0) "   "
     else " ".repeat((len - cur.toString().length) - 1)
-    //writer.write("-$cur$sub$q0")
-    writer.write(
-        if (curlhv.length - cur.toString().length - 1 >= 0) {
-            " ".repeat(curlhv.length - cur.toString().length - 1)
-        } else {
-            ""
-        }
-                + "-" + cur.toString() + sub + q0
-    )
-    writer.newLine()
-    writer.write("-".repeat(maxOf(curlhv.length, ("-$cur").length)))
-    writer.newLine()
-    prefix += " ".repeat(maxOf(curlhv.length, cur.toString().length + 1) - currem.toString().length)
-    writer.write(prefix + currem.toString())
+    var q1 = q0
+
+    fun appender(lhv1: String, cur: String, currem: String) {
+        writer.write(
+            prefix +
+                    if (lhv1.length - cur.length - 1 >= 0) {
+                        " ".repeat(lhv1.length - cur.length - 1)
+                    } else {
+                        ""
+                    }
+                    + "-" + cur
+        )
+        writer.write(sub + q1)
+        writer.newLine()
+        writer.write(prefix + "-".repeat(maxOf(lhv1.length, ("-$cur").length)))
+        writer.newLine()
+        prefix += " ".repeat(maxOf(lhv1.length, cur.length + 1) - currem.length)
+        writer.write(prefix + currem)
+    }
+    appender(curlhv, cur.toString(), currem.toString())
+    sub = ""
+    q1 = ""
 
     for (i in 1 until q0.length) {
         next += 1
@@ -592,20 +600,7 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
         curlhv = currem.toString() + lhv0[next]
         currem = curlhv.toInt() - cur
         if (curlhv.length - cur.toString().length < 1) prefix = prefix.substring(0, prefix.length - 1)
-        writer.write(
-            prefix +
-                    if (curlhv.length - cur.toString().length - 1 >= 0) {
-                        " ".repeat(curlhv.length - cur.toString().length - 1)
-                    } else {
-                        ""
-                    }
-                    + "-" + cur.toString()
-        )
-        writer.newLine()
-        writer.write(prefix + "-".repeat(maxOf(curlhv.length, ("-$cur").length)))
-        writer.newLine()
-        prefix += " ".repeat(maxOf(curlhv.length, cur.toString().length + 1) - currem.toString().length)
-        writer.write(prefix + currem.toString())
+        appender(curlhv, cur.toString(), currem.toString())
     }
 
     writer.close()
