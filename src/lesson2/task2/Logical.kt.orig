@@ -3,8 +3,13 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+<<<<<<< .merge_file_a06504
+import kotlin.math.max
+import kotlin.math.min
+=======
 import kotlin.math.abs
 import kotlin.math.sqrt
+>>>>>>> .merge_file_a07764
 
 /**
  * Пример
